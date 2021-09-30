@@ -3,14 +3,14 @@
     <entity name="Detail" representedClassName=".Detail" syncable="YES" codeGenerationType="class">
         <attribute name="completionTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="detail" optional="YES" attributeType="String"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="title" attributeType="String"/>
     </entity>
     <entity name="Item" representedClassName=".Item" syncable="YES" codeGenerationType="class">
-        <attribute name="modifyTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="modifyTime" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Item" positionX="-63" positionY="-18" width="128" height="59"/>
         <element name="Detail" positionX="-54" positionY="9" width="128" height="74"/>
+        <element name="Item" positionX="-63" positionY="-18" width="128" height="59"/>
     </elements>
 </model>
