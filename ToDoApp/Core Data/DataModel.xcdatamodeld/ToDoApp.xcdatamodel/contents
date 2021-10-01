@@ -6,7 +6,7 @@
         <attribute name="title" attributeType="String"/>
     </entity>
     <entity name="Item" representedClassName=".Item" syncable="YES" codeGenerationType="class">
-        <attribute name="modifyTime" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="modifyTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String"/>
     </entity>
     <elements>
