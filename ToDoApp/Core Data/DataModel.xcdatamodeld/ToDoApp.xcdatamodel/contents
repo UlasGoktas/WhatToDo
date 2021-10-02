@@ -4,13 +4,15 @@
         <attribute name="completionTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="detail" optional="YES" attributeType="String"/>
         <attribute name="title" attributeType="String"/>
+        <relationship name="parentItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="details" inverseEntity="Item"/>
     </entity>
     <entity name="Item" representedClassName=".Item" syncable="YES" codeGenerationType="class">
         <attribute name="modifyTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String"/>
+        <relationship name="details" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Detail" inverseName="parentItem" inverseEntity="Detail"/>
     </entity>
     <elements>
-        <element name="Detail" positionX="-54" positionY="9" width="128" height="74"/>
-        <element name="Item" positionX="-63" positionY="-18" width="128" height="59"/>
+        <element name="Detail" positionX="113.7557373046875" positionY="-12.6712646484375" width="128" height="103"/>
+        <element name="Item" positionX="-63" positionY="-18" width="128" height="88"/>
     </elements>
 </model>

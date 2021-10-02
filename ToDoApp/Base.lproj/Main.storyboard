@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Todo List View Controller-->
+        <!--Todo List-->
         <scene sceneID="6UI-p4-Wxf">
             <objects>
                 <tableViewController id="idY-ca-nnf" customClass="TodoListViewController" customModule="ToDoApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -39,22 +39,25 @@
                             <outlet property="delegate" destination="idY-ca-nnf" id="ouX-fm-oMf"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="e21-Jl-eHE">
+                    <navigationItem key="navigationItem" title="Todo List" id="e21-Jl-eHE">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="NTY-Vn-yOV">
                             <connections>
                                 <action selector="addButtonTapped:" destination="idY-ca-nnf" id="7GF-3v-07U"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="w8g-vJ-6AR" kind="show" identifier="goToDetails" id="pnJ-K0-tDo"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N34-a4-FYN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1362" y="129"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Details-->
         <scene sceneID="ytv-QP-rkB">
             <objects>
-                <tableViewController id="w8g-vJ-6AR" sceneMemberID="viewController">
+                <tableViewController id="w8g-vJ-6AR" customClass="DetailsViewController" customModule="ToDoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="lzq-f5-d53">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -74,6 +77,7 @@
                             <outlet property="delegate" destination="w8g-vJ-6AR" id="K7w-vR-lz4"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Details" id="RH3-EW-9fy"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QTl-os-fu7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

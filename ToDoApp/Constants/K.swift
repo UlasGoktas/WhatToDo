@@ -12,7 +12,7 @@ struct K {
     static let appName = "✔️WhatToDo"
     static let itemCellIdentifier = "ItemCell"
     static let detailCellIdentifier = "DetailCell"
-//    static let itemSegue = "goToDetails"
+    static let detailSegue = "goToDetails"
     
 //    struct BrandColors {
 //        static let purple = "BrandPurple"
