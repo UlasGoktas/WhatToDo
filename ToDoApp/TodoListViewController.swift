@@ -13,19 +13,21 @@ class TodoListViewController: UITableViewController {
     var itemArray = [Item]()
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //path for core data database file
-//        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        //        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        
+        //        searchBar.delegate = self
         
         loadItems()
     }
     
-
+    
     // MARK: - TableView Datasource Methods
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return itemArray.count
@@ -40,29 +42,16 @@ class TodoListViewController: UITableViewController {
         
         cell.textLabel?.text = item.name
         
-        //add checkmark for done items
-//        cell.accessoryType = item.done ? .checkmark : .none
-        
         return cell
-     }
+    }
     
     //MARK: - TableView Delegate Methods
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        //toggle done state
-//        itemArray[indexPath.row].done.toggle()
-        
-        //change value with different way
-//        itemArray[indexPath.row].setValue("Completed", forKey: "title")
-        
-        //eleman silerken once context icerisinden sonra asil listemizden siliyoruz yoksa index out of range hatasi aliriz
-        //CRUD operationlar arasindan read haricinde bir islem yaptigimizda saveItems() metodunu cagirip contextimizi kaydetmemiz gerekir.
-//        context.delete(itemArray[indexPath.row])
-//        itemArray.remove(at: indexPath.row)
-        
         saveItems()
         tableView.deselectRow(at: indexPath, animated: true)
+        
     }
     
     //MARK: - Add New Items
@@ -77,18 +66,10 @@ class TodoListViewController: UITableViewController {
             
             let newItem = Item(context: self.context)
             
-            
             newItem.name = textField.text!
-//            newItem.done = false
             self.itemArray.append(newItem)
             self.saveItems()
             
-            
-            
-//            if let newItem.name = textField.text {
-//                self.itemArray.append(newItem)
-//
-//            }
         }
         
         alert.addTextField { (alertTextField) in
@@ -101,7 +82,7 @@ class TodoListViewController: UITableViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    //MARK - Model Manupulation Methods
+    //MARK: - Model Manupulation Methods
     
     func saveItems() -> Void {
         
@@ -115,14 +96,52 @@ class TodoListViewController: UITableViewController {
         
     }
     
-    func loadItems() -> Void {
-        
-        let request: NSFetchRequest<Item> = Item.fetchRequest()
+    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil) -> Void {
         
         do {
             itemArray = try context.fetch(request)
         } catch {
             print("Error fetching data from context \(error)")
+        }
+        
+        tableView.reloadData()
+        
+    }
+    
+}
+
+//MARK: - Search Bar Metods
+
+extension TodoListViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        let request: NSFetchRequest<Item> = Item.fetchRequest()
+        
+        guard let searchBarText = searchBar.text else { return }
+        
+        //how data should filtered
+        //[cd] means case and diacritic insensitive
+        let predicate = NSPredicate(format: "name CONTAINS[cd] %@", searchBarText)
+        request.predicate = predicate
+        
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        request.sortDescriptors = [sortDescriptor]
+        
+        loadItems()
+        
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        //if searchBar.text clear then back to original todo list
+        if searchBar.text?.count == 0 {
+            loadItems()
+            
+            //dismiss the keyboard
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
         }
         
     }
