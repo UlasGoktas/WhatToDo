@@ -23,7 +23,7 @@ class CoreDataManager {
     }
     
     //save object into Core Data
-    class func saveObject(title: String, detail: String, completionTime: Date, modifyTime: Date) {
+    class func saveObject(title: String, detail: String?, completionTime: Date?, modifyTime: Date?) {
         
         let context = getContext()
         let entity = NSEntityDescription.entity(forEntityName: "Todo", in: context)
@@ -43,7 +43,7 @@ class CoreDataManager {
     }
     
     //fetch all the objects from Core Data
-    class func fetchObj(selectedScopeIndex: Int?, targetText: String?) -> [TodoItem] {
+    class func fetchObject(selectedScopeIndex: Int? = nil, targetText: String? = nil) -> [TodoItem] {
         
         var todoArray = [TodoItem]()
         

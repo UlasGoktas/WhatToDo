@@ -6,23 +6,17 @@
 //
 
 import UIKit
-import CoreData
 
 class TodoListViewController: UITableViewController {
     
-    var itemArray = [Item]()
-    
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var todoItemArray = [CoreDataManager.TodoItem]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //path for core data database file
-        //        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        updateData()
+        setUpSearchBar()
         
-        //        searchBar.delegate = self
-        
-        loadItems()
     }
     
     
@@ -30,17 +24,17 @@ class TodoListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return itemArray.count
+        return todoItemArray.count
         
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: K.itemCellIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.todoCellIdentifier, for: indexPath)
         
-        let item = itemArray[indexPath.row]
+        let item = todoItemArray[indexPath.row]
         
-        cell.textLabel?.text = item.name
+        cell.textLabel?.text = item.title
         
         return cell
     }
@@ -49,8 +43,17 @@ class TodoListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        saveItems()
         tableView.deselectRow(at: indexPath, animated: true)
+        
+    }
+    
+    //MARK: - Data Manupulation Methods
+    
+    func updateData() -> Void {
+        todoItemArray = CoreDataManager.fetchObject()
+    }
+    
+    func saveData() -> Void {
         
     }
     
@@ -63,12 +66,7 @@ class TodoListViewController: UITableViewController {
         let alert = UIAlertController(title: "Add New Todo Item", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "Add Item", style: .default) { action in
             
-            
-            let newItem = Item(context: self.context)
-            
-            newItem.name = textField.text!
-            self.itemArray.append(newItem)
-            self.saveItems()
+            CoreDataManager.saveObject(title: textField.text!, detail: nil, completionTime: nil, modifyTime: nil)
             
         }
         
@@ -80,31 +78,6 @@ class TodoListViewController: UITableViewController {
         alert.addAction(action)
         
         present(alert, animated: true, completion: nil)
-    }
-    
-    //MARK: - Model Manupulation Methods
-    
-    func saveItems() -> Void {
-        
-        do {
-            try context.save()
-        } catch {
-            print("Error saving context \(context)")
-        }
-        
-        self.tableView.reloadData()
-        
-    }
-    
-    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil) -> Void {
-        
-        do {
-            itemArray = try context.fetch(request)
-        } catch {
-            print("Error fetching data from context \(error)")
-        }
-        
-        tableView.reloadData()
         
     }
     
@@ -114,35 +87,31 @@ class TodoListViewController: UITableViewController {
 
 extension TodoListViewController: UISearchBarDelegate {
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    func setUpSearchBar() -> Void {
         
-        let request: NSFetchRequest<Item> = Item.fetchRequest()
+        let screenWidth: CGFloat = self.view.bounds.width
+        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 70))
         
-        guard let searchBarText = searchBar.text else { return }
+        searchBar.showsScopeBar = true
+        searchBar.scopeButtonTitles = ["title", "modify time"]
+        searchBar.selectedScopeButtonIndex = 0
         
-        //how data should filtered
-        //[cd] means case and diacritic insensitive
-        let predicate = NSPredicate(format: "name CONTAINS[cd] %@", searchBarText)
-        request.predicate = predicate
+        searchBar.delegate = self
         
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
-        request.sortDescriptors = [sortDescriptor]
-        
-        loadItems()
-        
+        self.tableView.tableHeaderView = searchBar
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        //if searchBar.text clear then back to original todo list
-        if searchBar.text?.count == 0 {
-            loadItems()
-            
-            //dismiss the keyboard
-            DispatchQueue.main.async {
-                searchBar.resignFirstResponder()
-            }
+        guard !searchText.isEmpty else {
+            todoItemArray = CoreDataManager.fetchObject()
+            tableView.reloadData()
+            return
         }
+        
+        todoItemArray = CoreDataManager.fetchObject(selectedScopeIndex: searchBar.selectedScopeButtonIndex, targetText: searchText)
+        tableView.reloadData()
+        print(searchText)
         
     }
     

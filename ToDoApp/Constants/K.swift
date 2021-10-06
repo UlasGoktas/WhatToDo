@@ -10,7 +10,7 @@ import Foundation
 struct K {
     
     static let appName = "✔️WhatToDo"
-    static let itemCellIdentifier = "ItemCell"
+    static let todoCellIdentifier = "ToDoItemCell"
     static let detailCellIdentifier = "DetailCell"
     static let detailSegue = "goToDetails"
     
