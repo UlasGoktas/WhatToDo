@@ -53,21 +53,20 @@ class TodoListViewController: UITableViewController {
         todoItemArray = CoreDataManager.fetchObject()
     }
     
-    func saveData() -> Void {
-        
-    }
-    
     //MARK: - Add New Items
     
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
         
         var textField = UITextField()
         
-        let alert = UIAlertController(title: "Add New Todo Item", message: "", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Add Item", style: .default) { action in
-            
+        let alert = UIAlertController(title: "Add New Todo", message: nil, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Add", style: .default) { action in
+
             CoreDataManager.saveObject(title: textField.text!, detail: nil, completionTime: nil, modifyTime: nil)
             
+            //when new to-do is created go to details screen
+            let detailsVC = DetailViewController()
+            self.navigationController?.pushViewController(detailsVC, animated: true)
         }
         
         alert.addTextField { (alertTextField) in
@@ -111,7 +110,6 @@ extension TodoListViewController: UISearchBarDelegate {
         
         todoItemArray = CoreDataManager.fetchObject(selectedScopeIndex: searchBar.selectedScopeButtonIndex, targetText: searchText)
         tableView.reloadData()
-        print(searchText)
         
     }
     
