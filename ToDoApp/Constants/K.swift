@@ -11,18 +11,31 @@ struct K {
     
     static let appName = "✔️WhatToDo"
     static let todoCellIdentifier = "ToDoItemCell"
-    static let detailCellIdentifier = "DetailCell"
+    static let detailCellIdentifier = "TodoDetailCell"
     static let detailSegue = "goToDetails"
     
-//    struct BrandColors {
-//        static let purple = "BrandPurple"
-//        static let lightPurple = "BrandLightPurple"
-//        static let blue = "BrandBlue"
-//        static let lighBlue = "BrandLightBlue"
-//    }
+    struct SearchBar {
+        
+        static let scopeButtonTitle = "Title"
+        static let scopeButtonModifyTime = "Modify Time"
+        
+    }
     
     struct CoreData {
-        static let persistentContainerName: String = "DataModel"
+        
+        static let persistentContainerName = "DataModel"
+        static let entityName = "Todo"
+        static let forKeyTitle = "title"
+        static let forKeyDetail = "detail"
+        static let forKeyCompletionTime = "completionTime"
+        static let forKeyModifyTime = "modifyTime"
+        
+        struct SearchFilters {
+            //[c] means case insensitive
+            static let filterRule = "contains[c] %@"
+            static let titleFilter = "title"
+            static let modifyTimeFilter = "modifyTime"
+        }
     }
     
 }

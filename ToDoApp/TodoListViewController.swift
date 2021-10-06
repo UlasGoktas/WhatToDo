@@ -92,7 +92,7 @@ extension TodoListViewController: UISearchBarDelegate {
         let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 70))
         
         searchBar.showsScopeBar = true
-        searchBar.scopeButtonTitles = ["title", "modify time"]
+        searchBar.scopeButtonTitles = [K.SearchBar.scopeButtonTitle, K.SearchBar.scopeButtonModifyTime]
         searchBar.selectedScopeButtonIndex = 0
         
         searchBar.delegate = self

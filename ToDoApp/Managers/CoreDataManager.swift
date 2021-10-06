@@ -26,13 +26,13 @@ class CoreDataManager {
     class func saveObject(title: String, detail: String?, completionTime: Date?, modifyTime: Date?) {
         
         let context = getContext()
-        let entity = NSEntityDescription.entity(forEntityName: "Todo", in: context)
+        let entity = NSEntityDescription.entity(forEntityName: K.CoreData.entityName, in: context)
         let managedObject = NSManagedObject(entity: entity!, insertInto: context)
         
-        managedObject.setValue(title, forKey: "title")
-        managedObject.setValue(detail, forKey: "detail")
-        managedObject.setValue(completionTime, forKey: "completionTime")
-        managedObject.setValue(modifyTime, forKey: "modifyTime")
+        managedObject.setValue(title, forKey: K.CoreData.forKeyTitle)
+        managedObject.setValue(detail, forKey: K.CoreData.forKeyDetail)
+        managedObject.setValue(completionTime, forKey: K.CoreData.forKeyCompletionTime)
+        managedObject.setValue(modifyTime, forKey: K.CoreData.forKeyModifyTime)
         
         do {
             try context.save()
@@ -54,14 +54,15 @@ class CoreDataManager {
             
             switch index {
             case 0:
-                filterKeyword = "title"
+                filterKeyword = K.CoreData.SearchFilters.titleFilter
             case 1:
-                filterKeyword = "modifyTime"
+                filterKeyword = K.CoreData.SearchFilters.modifyTimeFilter
             default:
                 print("Unknown selectedScopeIndex")
             }
             
-            let predicate = NSPredicate(format: "\(filterKeyword) contains[c] %@", text)
+            
+            let predicate = NSPredicate(format: "\(filterKeyword) \(K.CoreData.SearchFilters.filterRule)", text)
             fetchRequest.predicate = predicate
         }
         
