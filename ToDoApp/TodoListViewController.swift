@@ -43,8 +43,17 @@ class TodoListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        tableView.deselectRow(at: indexPath, animated: true)
+//        tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: K.detailSegue, sender: self)
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! DetailsViewController
+
+        if let indexPath = tableView.indexPathForSelectedRow {
+            destinationVC.selectedTodo = todoItemArray[indexPath.row]
+        }
     }
     
     //MARK: - Data Manupulation Methods
@@ -64,9 +73,9 @@ class TodoListViewController: UITableViewController {
 
             CoreDataManager.saveObject(title: textField.text!, detail: nil, completionTime: nil, modifyTime: nil)
             
-            //when new to-do is created go to details screen
-            let detailsVC = DetailViewController()
-            self.navigationController?.pushViewController(detailsVC, animated: true)
+//            //when new to-do is created go to details screen
+//            let detailsVC = DetailsViewController()
+//            self.navigationController?.pushViewController(detailsVC, animated: true)
         }
         
         alert.addTextField { (alertTextField) in
