@@ -55,31 +55,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Detail Screen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A3B-pK-8ka">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detail Screen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A3B-pK-8ka">
                                 <rect key="frame" x="156" y="96" width="102" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wbg-qy-RFb">
-                                <rect key="frame" x="53" y="255" width="309" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wbg-qy-RFb">
+                                <rect key="frame" x="53" y="255" width="308" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jeX-6G-3lA">
-                                <rect key="frame" x="53" y="175" width="309" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jeX-6G-3lA">
+                                <rect key="frame" x="53" y="175" width="308" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fZF-5U-KwR">
+                                <rect key="frame" x="53" y="337" width="308" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="OSn-Rh-pOR"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="A3B-pK-8ka" firstAttribute="centerX" secondItem="jAh-bL-45U" secondAttribute="centerX" id="1Gs-lF-t8V"/>
+                            <constraint firstItem="Wbg-qy-RFb" firstAttribute="trailing" secondItem="fZF-5U-KwR" secondAttribute="trailing" id="4R6-Bk-yb1"/>
+                            <constraint firstItem="jeX-6G-3lA" firstAttribute="leading" secondItem="OSn-Rh-pOR" secondAttribute="leading" constant="53" id="BHV-Lz-DV8"/>
+                            <constraint firstItem="A3B-pK-8ka" firstAttribute="centerX" secondItem="jeX-6G-3lA" secondAttribute="centerX" id="Rnd-9R-YUw"/>
+                            <constraint firstItem="fZF-5U-KwR" firstAttribute="top" secondItem="Wbg-qy-RFb" secondAttribute="bottom" constant="48" id="VvB-Mw-CdR"/>
+                            <constraint firstItem="jeX-6G-3lA" firstAttribute="leading" secondItem="Wbg-qy-RFb" secondAttribute="leading" id="ciZ-in-R93"/>
+                            <constraint firstItem="jeX-6G-3lA" firstAttribute="trailing" secondItem="Wbg-qy-RFb" secondAttribute="trailing" id="dD6-8c-Ynq"/>
+                            <constraint firstItem="Wbg-qy-RFb" firstAttribute="leading" secondItem="fZF-5U-KwR" secondAttribute="leading" id="ei5-2R-j2G"/>
+                            <constraint firstItem="Wbg-qy-RFb" firstAttribute="top" secondItem="jeX-6G-3lA" secondAttribute="bottom" constant="46" id="nZD-37-Ved"/>
+                            <constraint firstItem="jeX-6G-3lA" firstAttribute="top" secondItem="A3B-pK-8ka" secondAttribute="bottom" constant="58" id="p3T-XG-dL8"/>
+                            <constraint firstItem="A3B-pK-8ka" firstAttribute="top" secondItem="OSn-Rh-pOR" secondAttribute="top" constant="8" id="z0d-7W-BfD"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="lAp-xP-v5B"/>
                     <connections>
+                        <outlet property="completionTimeTextField" destination="fZF-5U-KwR" id="BVF-Ys-Agz"/>
                         <outlet property="detailTextField" destination="Wbg-qy-RFb" id="ElS-PY-NnA"/>
                         <outlet property="titleTextField" destination="jeX-6G-3lA" id="Dsj-oX-tPG"/>
                     </connections>
