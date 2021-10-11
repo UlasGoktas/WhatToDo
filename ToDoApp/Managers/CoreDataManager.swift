@@ -22,17 +22,17 @@ class CoreDataManager {
         return appDelegate.persistentContainer.viewContext
     }
     
-    //save object into Core Data
-    class func saveObject(title: String, detail: String?, completionTime: Date?, modifyTime: Date?) {
+    //create object into Core Data
+    class func createObject(title: String, detail: String?, completionTime: Date?, modifyTime: Date?) {
         
         let context = getContext()
         let entity = NSEntityDescription.entity(forEntityName: K.CoreData.entityName, in: context)
-        let managedObject = NSManagedObject(entity: entity!, insertInto: context)
+        let newTodo = NSManagedObject(entity: entity!, insertInto: context)
         
-        managedObject.setValue(title, forKey: K.CoreData.forKeyTitle)
-        managedObject.setValue(detail, forKey: K.CoreData.forKeyDetail)
-        managedObject.setValue(completionTime, forKey: K.CoreData.forKeyCompletionTime)
-        managedObject.setValue(modifyTime, forKey: K.CoreData.forKeyModifyTime)
+        newTodo.setValue(title, forKey: K.CoreData.forKeyTitle)
+        newTodo.setValue(detail, forKey: K.CoreData.forKeyDetail)
+        newTodo.setValue(completionTime, forKey: K.CoreData.forKeyCompletionTime)
+        newTodo.setValue(modifyTime, forKey: K.CoreData.forKeyModifyTime)
         
         do {
             try context.save()

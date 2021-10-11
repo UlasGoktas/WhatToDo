@@ -45,7 +45,6 @@ class DetailsViewController: UIViewController {
         } else {
             self.editButtonItem.title = "Edit"
             toggleUserInteraction()
-            
         }
     }
     
