@@ -20,6 +20,11 @@ class TodoListViewController: UITableViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        //TODO: write condition for checking todo element values changed or not
+        tableView.reloadData()
+    }
+    
     
     // MARK: - TableView Datasource Methods
     
