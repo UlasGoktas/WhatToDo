@@ -10,69 +10,79 @@ import CoreData
 
 class CoreDataManager {
     
-    struct TodoItem {
-        var title: String?
-        var detail: String?
-        var completionTime: Date?
-        var modifyTime: Date?
-    }
-    
-    private class func getContext() -> NSManagedObjectContext {
+    private func getContext() -> NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
     }
     
-    //create object into Core Data
-    class func createObject(title: String, detail: String?, completionTime: Date?, modifyTime: Date?) {
-        
+    //save object into Core Data
+    func saveObject(title: String, detail: String?, completionTime: Date?) -> Void {
         let context = getContext()
-        let entity = NSEntityDescription.entity(forEntityName: K.CoreData.entityName, in: context)
-        let newTodo = NSManagedObject(entity: entity!, insertInto: context)
+        let newTodo = Todo(context: context)
         
-        newTodo.setValue(title, forKey: K.CoreData.forKeyTitle)
-        newTodo.setValue(detail, forKey: K.CoreData.forKeyDetail)
-        newTodo.setValue(completionTime, forKey: K.CoreData.forKeyCompletionTime)
-        newTodo.setValue(modifyTime, forKey: K.CoreData.forKeyModifyTime)
+        newTodo.id = UUID()
+        newTodo.title = title
+        newTodo.detail = detail
+        newTodo.completionTime = completionTime
+        newTodo.modifyTime = Date()
         
         do {
             try context.save()
         } catch {
             print(error.localizedDescription)
         }
-        
     }
     
-    //fetch all the objects from Core Data
-    class func fetchObject(selectedScopeIndex: Int? = nil, targetText: String? = nil) -> [TodoItem] {
+    func updateObject(id: UUID, title: String, detail: String?, completionTime: Date?) -> Void {
+        let context = getContext()
         
-        var todoArray = [TodoItem]()
+        let fetchRequest: NSFetchRequest<Todo> = Todo.fetchRequest()
+        let predicate = NSPredicate(format: "\(K.CoreData.forKeyId) == %@", id as CVarArg)
+        fetchRequest.predicate = predicate
+        
+        do {
+            let object = try context.fetch(fetchRequest)
+            let objectUpdate = object.first
+            
+            objectUpdate?.title = title
+            objectUpdate?.detail = detail
+            objectUpdate?.completionTime = completionTime
+            objectUpdate?.modifyTime = Date()
+            
+            do {
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func fetchObject(selectedScopeIndex: Int? = nil, searchText: String? = nil) -> [Todo] {
+        var todoArray = [Todo]()
         
         let fetchRequest: NSFetchRequest<Todo> = Todo.fetchRequest()
         
-        if let index = selectedScopeIndex, let text = targetText {
-            var filterKeyword = ""
+        if let index = selectedScopeIndex, let searchText = searchText {
             
-            switch index {
-            case 0:
-                filterKeyword = K.CoreData.SearchFilters.titleFilter
-            case 1:
-                filterKeyword = K.CoreData.SearchFilters.modifyTimeFilter
-            default:
-                print("Unknown selectedScopeIndex")
+            if index == K.CoreData.SearchFilters.titleSearchIndex {
+                
+                let predicate = NSPredicate(format: "\(K.CoreData.SearchFilters.titleFilter) \(K.CoreData.SearchFilters.filterRule)", searchText)
+                fetchRequest.predicate = predicate
+                
+            } else if index == K.CoreData.SearchFilters.timeSearchIndex {
+                
+                let sortDate = NSSortDescriptor(key: K.CoreData.SearchFilters.modifyTimeFilter, ascending: false)
+                fetchRequest.sortDescriptors = [sortDate]
+                
             }
             
-            
-            let predicate = NSPredicate(format: "\(filterKeyword) \(K.CoreData.SearchFilters.filterRule)", text)
-            fetchRequest.predicate = predicate
         }
         
         do {
             let fetchResult = try getContext().fetch(fetchRequest)
-            
-            for item in fetchResult {
-                let todo = TodoItem(title: item.title, detail: item.detail, completionTime: item.completionTime, modifyTime: item.modifyTime)
-                todoArray.append(todo)
-            }
+            todoArray = fetchResult
         } catch {
             print(error.localizedDescription)
         }

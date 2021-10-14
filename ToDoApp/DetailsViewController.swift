@@ -13,7 +13,8 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var detailTextField: UITextField!
     @IBOutlet weak var completionTimeTextField: UITextField!
     
-    var selectedTodo: CoreDataManager.TodoItem?
+    var selectedTodo: Todo!
+    var coreDataManager = CoreDataManager()
     let datePicker = UIDatePicker()
     
     override func viewDidLoad() {
@@ -21,6 +22,11 @@ class DetailsViewController: UIViewController {
         
         titleTextField.text = selectedTodo?.title
         detailTextField.text = selectedTodo?.detail
+        
+        if let completionTime = dateFormatter(pickedDate: selectedTodo.completionTime) {
+            completionTimeTextField.text = completionTime
+        }
+        
         titleTextField.placeholder = "Todo title"
         detailTextField.placeholder = "Todo description"
         completionTimeTextField.placeholder = "Todo completion time"
@@ -44,6 +50,7 @@ class DetailsViewController: UIViewController {
             
         } else {
             self.editButtonItem.title = "Edit"
+            coreDataManager.updateObject(id: selectedTodo.id!, title: titleTextField.text ?? "", detail: detailTextField.text ?? "", completionTime: datePicker.date)
             toggleUserInteraction()
         }
     }
@@ -79,13 +86,23 @@ class DetailsViewController: UIViewController {
     }
     
     @objc func datePickerDoneButtonTapped() -> Void {
-        //formatter
+        
+        completionTimeTextField.text = dateFormatter(pickedDate: datePicker.date)
+        self.view.endEditing(true)
+        
+    }
+    
+    func dateFormatter(pickedDate: Date?) -> String? {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.timeStyle = .short
         
-//        completionTimeTextField.text = "\(datePicker.date)"
-        completionTimeTextField.text = formatter.string(from: datePicker.date)
-        self.view.endEditing(true)
+        guard let pickedDate = pickedDate else {
+            return nil
+        }
+        
+        let formattedString = formatter.string(from: pickedDate)
+        
+        return formattedString
     }
 }

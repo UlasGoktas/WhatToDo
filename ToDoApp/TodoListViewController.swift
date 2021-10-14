@@ -9,7 +9,8 @@ import UIKit
 
 class TodoListViewController: UITableViewController {
     
-    var todoItemArray = [CoreDataManager.TodoItem]()
+    var todoItemArray = [Todo]()
+    var coreDataManager = CoreDataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +60,7 @@ class TodoListViewController: UITableViewController {
     //MARK: - Data Manupulation Methods
     
     func updateData() -> Void {
-        todoItemArray = CoreDataManager.fetchObject()
+        todoItemArray = coreDataManager.fetchObject()
     }
     
     //MARK: - Add New Items
@@ -71,11 +72,8 @@ class TodoListViewController: UITableViewController {
         let alert = UIAlertController(title: "Add New Todo", message: nil, preferredStyle: .alert)
         let action = UIAlertAction(title: "Add", style: .default) { action in
 
-            CoreDataManager.createObject(title: textField.text!, detail: nil, completionTime: nil, modifyTime: nil)
-            
-//            //when new to-do is created go to details screen
-//            let detailsVC = DetailsViewController()
-//            self.navigationController?.pushViewController(detailsVC, animated: true)
+//            CoreDataManager.createObject(title: textField.text!, detail: nil, completionTime: nil, modifyTime: nil)
+            self.coreDataManager.saveObject(title: textField.text!, detail: nil, completionTime: nil)
         }
         
         alert.addTextField { (alertTextField) in
@@ -112,12 +110,12 @@ extension TodoListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         guard !searchText.isEmpty else {
-            todoItemArray = CoreDataManager.fetchObject()
+            todoItemArray = coreDataManager.fetchObject()
             tableView.reloadData()
             return
         }
         
-        todoItemArray = CoreDataManager.fetchObject(selectedScopeIndex: searchBar.selectedScopeButtonIndex, targetText: searchText)
+        todoItemArray = coreDataManager.fetchObject(selectedScopeIndex: searchBar.selectedScopeButtonIndex, searchText: searchText)
         tableView.reloadData()
         
     }

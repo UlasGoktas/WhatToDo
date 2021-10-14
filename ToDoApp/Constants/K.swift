@@ -29,12 +29,15 @@ struct K {
         static let forKeyDetail = "detail"
         static let forKeyCompletionTime = "completionTime"
         static let forKeyModifyTime = "modifyTime"
+        static let forKeyId = "id"
         
         struct SearchFilters {
             //[c] means case insensitive
             static let filterRule = "contains[c] %@"
             static let titleFilter = "title"
             static let modifyTimeFilter = "modifyTime"
+            static let titleSearchIndex = 0
+            static let timeSearchIndex = 1
         }
     }
     
