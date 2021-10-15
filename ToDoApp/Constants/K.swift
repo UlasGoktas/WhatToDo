@@ -21,6 +21,13 @@ struct K {
         
     }
     
+    struct Notification {
+        
+        static let imageName = "NotificationImage"
+        static let identifier = "localNotification.date"
+        
+    }
+    
     struct CoreData {
         
         static let persistentContainerName = "DataModel"
