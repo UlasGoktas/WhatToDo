@@ -50,10 +50,7 @@ class TodoListViewController: UITableViewController {
     //MARK: - TableView Delegate Methods
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-//        tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: K.detailSegue, sender: self)
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -74,21 +71,27 @@ class TodoListViewController: UITableViewController {
     
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
         
-        var textField = UITextField()
-        
         let alert = UIAlertController(title: "Add New Todo", message: nil, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Add", style: .default) { action in
-
-            self.coreDataManager.saveObject(title: textField.text!, detail: nil, completionTime: nil)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        let addAction = UIAlertAction(title: "Add", style: .default) { action in
+            
+            guard let todoName = alert.textFields?[0].text else { return }
+            
+            self.coreDataManager.saveObject(title: todoName, detail: nil, completionTime: nil)
         }
         
-        alert.addTextField { (alertTextField) in
-            alertTextField.placeholder = "Create new item"
-            textField = alertTextField
+        alert.addAction(cancelAction)
+        alert.addAction(addAction)
+        
+        alert.addTextField { (textField) in
+            textField.text = ""
+            addAction.isEnabled = false
+            NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) { (notification) in
+                addAction.isEnabled = textField.text!.count > 0
+            }
         }
-        
-        alert.addAction(action)
-        
         present(alert, animated: true, completion: nil)
     }
     
