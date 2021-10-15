@@ -21,7 +21,6 @@
 		7CACE79E27063DCA004DF215 /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CACE79D27063DCA004DF215 /* TodoListViewController.swift */; };
 		7CD6FC8627188F2B006C1B88 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD6FC8527188F2B006C1B88 /* LocalNotificationManager.swift */; };
 		7CE13E47270F0752004F745C /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE13E46270F0752004F745C /* DetailsViewController.swift */; };
-		7CF63D692719B26300D4E04C /* DateAlert.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CF63D682719B26300D4E04C /* DateAlert.png */; };
 		7CF63D6B2719B5A600D4E04C /* NotificationImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CF63D6A2719B5A600D4E04C /* NotificationImage.png */; };
 /* End PBXBuildFile section */
 
@@ -61,7 +60,6 @@
 		7CACE79D27063DCA004DF215 /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
 		7CD6FC8527188F2B006C1B88 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		7CE13E46270F0752004F745C /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
-		7CF63D682719B26300D4E04C /* DateAlert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DateAlert.png; sourceTree = "<group>"; };
 		7CF63D6A2719B5A600D4E04C /* NotificationImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotificationImage.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -183,7 +181,6 @@
 			isa = PBXGroup;
 			children = (
 				7CF63D6A2719B5A600D4E04C /* NotificationImage.png */,
-				7CF63D682719B26300D4E04C /* DateAlert.png */,
 			);
 			path = "Notification Asset";
 			sourceTree = "<group>";
@@ -295,7 +292,6 @@
 				7CF63D6B2719B5A600D4E04C /* NotificationImage.png in Resources */,
 				7C4E0E8F270488E100BFB87A /* LaunchScreen.storyboard in Resources */,
 				7C4E0E8C270488E100BFB87A /* Assets.xcassets in Resources */,
-				7CF63D692719B26300D4E04C /* DateAlert.png in Resources */,
 				7C4E0E87270488DF00BFB87A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
