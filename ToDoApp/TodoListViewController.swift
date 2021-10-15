@@ -15,7 +15,7 @@ class TodoListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        LocalNotificationManager.shared.authorize()
+        LocalNotificationManager.shared.authorizeNotification()
         
         updateData()
         setUpSearchBar()

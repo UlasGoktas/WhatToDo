@@ -18,38 +18,41 @@ class LocalNotificationManager: NSObject {
     
     //MARK: - Notification Content
     
-    func authorize() -> Void {
-        let options: UNAuthorizationOptions = [.alert, .sound]
+    func authorizeNotification() -> Void {
+        let options: UNAuthorizationOptions = [.alert, .badge, .sound]
         center.requestAuthorization(options: options) { granted, error in
             
-            print(error?.localizedDescription ?? "Authorization error")
+            print(error?.localizedDescription ?? "Notification authorization successful")
             
             guard granted else {
                 print("User denied notification permission")
                 return
             }
-            self.configure()
+            self.configureNotification()
         }
         
     }
     
-    func configure() -> Void {
+    func configureNotification() -> Void {
         center.delegate = self
-        
     }
     
     //MARK: - Notification Trigger
     
-    func dateRequest(with components: DateComponents) -> Void {
+    func scheduledNotificationRequest(with deadline: Date, with todoName: String) -> Void {
         let content = UNMutableNotificationContent()
-        content.title = "Todo completion time trigger"
-        content.body = "Your time is up"
+        content.title = "Your time is up!"
+        content.body = "Complete your \(todoName) task. Lazy!"
         content.sound = .default
         //notification badge always show 1 notification on app icon
         content.badge = 1
         
-        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
-        let request = UNNotificationRequest(identifier: "userNotification.date", content: content, trigger: trigger)
+        let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: deadline)
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        
+        let uuidString = UUID().uuidString
+        let request = UNNotificationRequest(identifier: uuidString, content: content, trigger: trigger)
         
         center.add(request)
     }
@@ -59,14 +62,14 @@ class LocalNotificationManager: NSObject {
 extension LocalNotificationManager: UNUserNotificationCenterDelegate {
     //foreground
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        print("UN did receive response")
+        print("Notification did receive response")
         
         completionHandler()
     }
     
     //background
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        print("UN will present")
+        print("Notification will present")
         
         let options: UNNotificationPresentationOptions = [.badge, .sound]
         completionHandler(options)
