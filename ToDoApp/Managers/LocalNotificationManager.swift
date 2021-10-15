@@ -9,18 +9,18 @@ import Foundation
 import UserNotifications
 import UIKit
 
-class NotificationService: NSObject {
+class LocalNotificationManager: NSObject {
     
     private override init() {}
-    static let shared = NotificationService()
+    static let shared = LocalNotificationManager()
     
-    let unCenter = UNUserNotificationCenter.current()
+    let center = UNUserNotificationCenter.current()
     
     //MARK: - Notification Content
     
     func authorize() -> Void {
-        let options: UNAuthorizationOptions = [.alert, .badge, .sound]
-        unCenter.requestAuthorization(options: options) { granted, error in
+        let options: UNAuthorizationOptions = [.alert, .sound]
+        center.requestAuthorization(options: options) { granted, error in
             
             print(error?.localizedDescription ?? "Authorization error")
             
@@ -34,7 +34,7 @@ class NotificationService: NSObject {
     }
     
     func configure() -> Void {
-        unCenter.delegate = self
+        center.delegate = self
         
     }
     
@@ -48,15 +48,15 @@ class NotificationService: NSObject {
         //notification badge always show 1 notification on app icon
         content.badge = 1
         
-        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
         let request = UNNotificationRequest(identifier: "userNotification.date", content: content, trigger: trigger)
         
-        unCenter.add(request)
+        center.add(request)
     }
     
 }
 
-extension NotificationService: UNUserNotificationCenterDelegate {
+extension LocalNotificationManager: UNUserNotificationCenterDelegate {
     //foreground
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         print("UN did receive response")

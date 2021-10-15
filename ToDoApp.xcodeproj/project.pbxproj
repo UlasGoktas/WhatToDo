@@ -19,6 +19,7 @@
 		7C7838C82704D1CE00AFFA9A /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7838C72704D1CE00AFFA9A /* CoreDataManager.swift */; };
 		7C7838CB2704D5A600AFFA9A /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7838CA2704D5A600AFFA9A /* K.swift */; };
 		7CACE79E27063DCA004DF215 /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CACE79D27063DCA004DF215 /* TodoListViewController.swift */; };
+		7CD6FC8627188F2B006C1B88 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD6FC8527188F2B006C1B88 /* LocalNotificationManager.swift */; };
 		7CE13E47270F0752004F745C /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE13E46270F0752004F745C /* DetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,7 @@
 		7C7838C72704D1CE00AFFA9A /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		7C7838CA2704D5A600AFFA9A /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
 		7CACE79D27063DCA004DF215 /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
+		7CD6FC8527188F2B006C1B88 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		7CE13E46270F0752004F745C /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -150,6 +152,7 @@
 		7C7838C62704D1A500AFFA9A /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				7CD6FC8527188F2B006C1B88 /* LocalNotificationManager.swift */,
 				7C7838C72704D1CE00AFFA9A /* CoreDataManager.swift */,
 			);
 			path = Managers;
@@ -306,6 +309,7 @@
 				7C4E0E80270488DF00BFB87A /* AppDelegate.swift in Sources */,
 				7C4E0E82270488DF00BFB87A /* SceneDelegate.swift in Sources */,
 				7CE13E47270F0752004F745C /* DetailsViewController.swift in Sources */,
+				7CD6FC8627188F2B006C1B88 /* LocalNotificationManager.swift in Sources */,
 				7C7838CB2704D5A600AFFA9A /* K.swift in Sources */,
 				7C7838C82704D1CE00AFFA9A /* CoreDataManager.swift in Sources */,
 				7C4E0E8A270488DF00BFB87A /* DataModel.xcdatamodeld in Sources */,

@@ -15,6 +15,8 @@ class TodoListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        LocalNotificationManager.shared.authorize()
+        
         updateData()
         setUpSearchBar()
         
@@ -77,7 +79,6 @@ class TodoListViewController: UITableViewController {
         let alert = UIAlertController(title: "Add New Todo", message: nil, preferredStyle: .alert)
         let action = UIAlertAction(title: "Add", style: .default) { action in
 
-//            CoreDataManager.createObject(title: textField.text!, detail: nil, completionTime: nil, modifyTime: nil)
             self.coreDataManager.saveObject(title: textField.text!, detail: nil, completionTime: nil)
         }
         
@@ -89,7 +90,6 @@ class TodoListViewController: UITableViewController {
         alert.addAction(action)
         
         present(alert, animated: true, completion: nil)
-        
     }
     
 }

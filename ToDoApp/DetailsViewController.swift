@@ -51,6 +51,11 @@ class DetailsViewController: UIViewController {
         } else {
             self.editButtonItem.title = "Edit"
             coreDataManager.updateObject(id: selectedTodo.id!, title: titleTextField.text ?? "", detail: detailTextField.text ?? "", completionTime: datePicker.date)
+            //notification test
+            var components = DateComponents()
+            components.second = Int(selectedTodo.title!)
+            LocalNotificationManager.shared.dateRequest(with: components)
+            
             toggleUserInteraction()
         }
     }
