@@ -39,6 +39,10 @@ class DetailsViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         createDatePicker()
+        
+        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: titleTextField, queue: OperationQueue.main) { notification in
+            self.editButtonItem.isEnabled = self.titleTextField.text!.count > 0
+        }
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {

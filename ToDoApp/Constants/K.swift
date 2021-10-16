@@ -11,7 +11,6 @@ struct K {
     
     static let appName = "✔️WhatToDo"
     static let todoCellIdentifier = "ToDoItemCell"
-    static let detailCellIdentifier = "TodoDetailCell"
     static let detailSegue = "goToDetails"
     
     struct SearchBar {

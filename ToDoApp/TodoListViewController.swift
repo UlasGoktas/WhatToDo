@@ -88,6 +88,7 @@ class TodoListViewController: UITableViewController {
         alert.addTextField { (textField) in
             textField.text = ""
             addAction.isEnabled = false
+            
             NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) { (notification) in
                 addAction.isEnabled = textField.text!.count > 0
             }
