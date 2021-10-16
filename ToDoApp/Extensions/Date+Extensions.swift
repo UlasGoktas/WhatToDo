@@ -13,7 +13,7 @@ extension Date {
         formatter.dateStyle = .medium
         formatter.timeStyle = .short
         let formattedString = formatter.string(from: self)
-        
+
         return formattedString
     }
 }
