@@ -115,15 +115,13 @@
 		7C4E0E7E270488DF00BFB87A /* ToDoApp */ = {
 			isa = PBXGroup;
 			children = (
-				7C4E0E7F270488DF00BFB87A /* AppDelegate.swift */,
-				7C4E0E81270488DF00BFB87A /* SceneDelegate.swift */,
+				7CBB40E2271B0D9700D0EE67 /* AppDelegate */,
 				7CACE79D27063DCA004DF215 /* TodoListViewController.swift */,
 				7CE13E46270F0752004F745C /* DetailsViewController.swift */,
 				7C4E0E85270488DF00BFB87A /* Main.storyboard */,
-				7C4E0E90270488E100BFB87A /* Info.plist */,
 				7C7838C62704D1A500AFFA9A /* Managers */,
-				7C7838C92704D26200AFFA9A /* Core Data */,
-				7C7838C52704D15900AFFA9A /* Supporting Files */,
+				7C7838C92704D26200AFFA9A /* CoreData */,
+				7C7838C52704D15900AFFA9A /* SupportingFiles */,
 				7C7838CC2704D70A00AFFA9A /* Constants */,
 				7CBB40DD271B081900D0EE67 /* Extensions */,
 			);
@@ -147,14 +145,15 @@
 			path = ToDoAppUITests;
 			sourceTree = "<group>";
 		};
-		7C7838C52704D15900AFFA9A /* Supporting Files */ = {
+		7C7838C52704D15900AFFA9A /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
 				7CF63D672719B23A00D4E04C /* Notification Asset */,
 				7C4E0E8B270488E100BFB87A /* Assets.xcassets */,
 				7C4E0E8D270488E100BFB87A /* LaunchScreen.storyboard */,
+				7C4E0E90270488E100BFB87A /* Info.plist */,
 			);
-			path = "Supporting Files";
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		7C7838C62704D1A500AFFA9A /* Managers */ = {
@@ -166,12 +165,12 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
-		7C7838C92704D26200AFFA9A /* Core Data */ = {
+		7C7838C92704D26200AFFA9A /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
 				7C4E0E88270488DF00BFB87A /* DataModel.xcdatamodeld */,
 			);
-			path = "Core Data";
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		7C7838CC2704D70A00AFFA9A /* Constants */ = {
@@ -189,6 +188,15 @@
 				7CBB40E0271B0BC600D0EE67 /* LocalNotificationManager+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		7CBB40E2271B0D9700D0EE67 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				7C4E0E7F270488DF00BFB87A /* AppDelegate.swift */,
+				7C4E0E81270488DF00BFB87A /* SceneDelegate.swift */,
+			);
+			path = AppDelegate;
 			sourceTree = "<group>";
 		};
 		7CF63D672719B23A00D4E04C /* Notification Asset */ = {
