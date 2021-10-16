@@ -74,19 +74,19 @@ class LocalNotificationManager: NSObject {
     
 }
 
-extension LocalNotificationManager: UNUserNotificationCenterDelegate {
-    //foreground
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        print("Notification did receive response")
-        
-        completionHandler()
-    }
-    
-    //background
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        print("Notification will present")
-        
-        let options: UNNotificationPresentationOptions = [.badge, .sound]
-        completionHandler(options)
-    }
-}
+//extension LocalNotificationManager: UNUserNotificationCenterDelegate {
+//    //foreground
+//    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+//        print("Notification did receive response")
+//        
+//        completionHandler()
+//    }
+//    
+//    //background
+//    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+//        print("Notification will present")
+//        
+//        let options: UNNotificationPresentationOptions = [.badge, .sound]
+//        completionHandler(options)
+//    }
+//}

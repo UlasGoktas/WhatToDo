@@ -19,6 +19,8 @@
 		7C7838C82704D1CE00AFFA9A /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7838C72704D1CE00AFFA9A /* CoreDataManager.swift */; };
 		7C7838CB2704D5A600AFFA9A /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7838CA2704D5A600AFFA9A /* K.swift */; };
 		7CACE79E27063DCA004DF215 /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CACE79D27063DCA004DF215 /* TodoListViewController.swift */; };
+		7CBB40DF271B08B700D0EE67 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBB40DE271B08B700D0EE67 /* Date+Extensions.swift */; };
+		7CBB40E1271B0BC600D0EE67 /* LocalNotificationManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBB40E0271B0BC600D0EE67 /* LocalNotificationManager+Extensions.swift */; };
 		7CD6FC8627188F2B006C1B88 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD6FC8527188F2B006C1B88 /* LocalNotificationManager.swift */; };
 		7CE13E47270F0752004F745C /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE13E46270F0752004F745C /* DetailsViewController.swift */; };
 		7CF63D6B2719B5A600D4E04C /* NotificationImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CF63D6A2719B5A600D4E04C /* NotificationImage.png */; };
@@ -58,6 +60,8 @@
 		7C7838C72704D1CE00AFFA9A /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		7C7838CA2704D5A600AFFA9A /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
 		7CACE79D27063DCA004DF215 /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
+		7CBB40DE271B08B700D0EE67 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		7CBB40E0271B0BC600D0EE67 /* LocalNotificationManager+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalNotificationManager+Extensions.swift"; sourceTree = "<group>"; };
 		7CD6FC8527188F2B006C1B88 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		7CE13E46270F0752004F745C /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		7CF63D6A2719B5A600D4E04C /* NotificationImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotificationImage.png; sourceTree = "<group>"; };
@@ -121,6 +125,7 @@
 				7C7838C92704D26200AFFA9A /* Core Data */,
 				7C7838C52704D15900AFFA9A /* Supporting Files */,
 				7C7838CC2704D70A00AFFA9A /* Constants */,
+				7CBB40DD271B081900D0EE67 /* Extensions */,
 			);
 			path = ToDoApp;
 			sourceTree = "<group>";
@@ -175,6 +180,15 @@
 				7C7838CA2704D5A600AFFA9A /* K.swift */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		7CBB40DD271B081900D0EE67 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7CBB40DE271B08B700D0EE67 /* Date+Extensions.swift */,
+				7CBB40E0271B0BC600D0EE67 /* LocalNotificationManager+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		7CF63D672719B23A00D4E04C /* Notification Asset */ = {
@@ -317,8 +331,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CBB40E1271B0BC600D0EE67 /* LocalNotificationManager+Extensions.swift in Sources */,
 				7CACE79E27063DCA004DF215 /* TodoListViewController.swift in Sources */,
 				7C4E0E80270488DF00BFB87A /* AppDelegate.swift in Sources */,
+				7CBB40DF271B08B700D0EE67 /* Date+Extensions.swift in Sources */,
 				7C4E0E82270488DF00BFB87A /* SceneDelegate.swift in Sources */,
 				7CE13E47270F0752004F745C /* DetailsViewController.swift in Sources */,
 				7CD6FC8627188F2B006C1B88 /* LocalNotificationManager.swift in Sources */,

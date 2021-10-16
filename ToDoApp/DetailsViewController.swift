@@ -23,7 +23,7 @@ class DetailsViewController: UIViewController {
         titleTextField.text = selectedTodo?.title
         detailTextField.text = selectedTodo?.detail
         
-        if let completionTime = dateFormatter(pickedDate: selectedTodo.completionTime) {
+        if let completionTime = selectedTodo.completionTime?.timeToString() {
             completionTimeTextField.text = completionTime
         }
         
@@ -80,12 +80,9 @@ class DetailsViewController: UIViewController {
         if #available(iOS 13.4, *) {
            datePicker.preferredDatePickerStyle = .wheels
         }
-        
-        //bar button
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(datePickerDoneButtonTapped))
         toolbar.setItems([doneButton], animated: true)
         
-        //assign toolbar
         completionTimeTextField.inputAccessoryView = toolbar
         
         //assign date picker to the text field
@@ -97,22 +94,8 @@ class DetailsViewController: UIViewController {
     
     @objc func datePickerDoneButtonTapped() -> Void {
         
-        completionTimeTextField.text = dateFormatter(pickedDate: datePicker.date)
+        completionTimeTextField.text = datePicker.date.timeToString()
         self.view.endEditing(true)
         
-    }
-    
-    func dateFormatter(pickedDate: Date?) -> String? {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .short
-        
-        guard let pickedDate = pickedDate else {
-            return nil
-        }
-        
-        let formattedString = formatter.string(from: pickedDate)
-        
-        return formattedString
     }
 }
