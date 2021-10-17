@@ -16,6 +16,7 @@ class DetailsViewController: UIViewController {
     var selectedTodo: Todo!
     var coreDataManager = CoreDataManager()
     let datePicker = UIDatePicker()
+    private var isDatePicked = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,22 +54,25 @@ class DetailsViewController: UIViewController {
         super.setEditing(editing, animated: animated)
 
         if self.isEditing {
-//            self.editButtonItem.title = "Done"
-            self.editButtonItem.image = UIImage(systemName: "checkmark")
+            self.editButtonItem.title = "Done"
+            isDatePicked = false
             toggleUserInteraction()
 
         } else {
-//            self.editButtonItem.title = "Edit"
-            self.editButtonItem.image = UIImage(systemName: "square.and.pencil")
+            self.editButtonItem.title = "Edit"
             coreDataManager.updateObject(
                 todoId: selectedTodo.id!,
                 title: titleTextField.text ?? "",
                 detail: detailTextField.text ?? "",
-                completionTime: datePicker.date)
+                // Can't assign datePicker.date directly. datepicker.date has default date even is not picked.
+                completionTime: isDatePicked ? datePicker.date : nil)
 
             // Call notification
             if let completionTime = selectedTodo.completionTime, let todoName = selectedTodo.title {
-                LocalNotificationManager.shared.scheduledNotificationRequest(with: completionTime, with: todoName)
+                // If completionTime passed don't trigger notification.
+                if completionTime > Date() {
+                    LocalNotificationManager.shared.scheduledNotificationRequest(with: completionTime, with: todoName)
+                }
             }
 
             toggleUserInteraction()
@@ -105,7 +109,7 @@ class DetailsViewController: UIViewController {
     }
 
     @objc func datePickerDoneButtonTapped() {
-
+        isDatePicked = true
         completionTimeTextField.text = datePicker.date.timeToString()
         self.view.endEditing(true)
     }
