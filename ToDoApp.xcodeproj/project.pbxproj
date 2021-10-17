@@ -24,6 +24,7 @@
 		7CBB40DF271B08B700D0EE67 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBB40DE271B08B700D0EE67 /* Date+Extensions.swift */; };
 		7CBB40E1271B0BC600D0EE67 /* LocalNotificationManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBB40E0271B0BC600D0EE67 /* LocalNotificationManager+Extensions.swift */; };
 		7CD6FC8627188F2B006C1B88 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD6FC8527188F2B006C1B88 /* LocalNotificationManager.swift */; };
+		7CDEB0A4271C9FCB001FD613 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDEB0A3271C9FCB001FD613 /* UIViewController+Extensions.swift */; };
 		7CE13E47270F0752004F745C /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE13E46270F0752004F745C /* DetailsViewController.swift */; };
 		7CF63D6B2719B5A600D4E04C /* NotificationImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CF63D6A2719B5A600D4E04C /* NotificationImage.png */; };
 		BF87057E7B703C5AD223FB78 /* Pods_ToDoAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3351AC3578450AE760526E95 /* Pods_ToDoAppTests.framework */; };
@@ -72,6 +73,7 @@
 		7CBB40DE271B08B700D0EE67 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		7CBB40E0271B0BC600D0EE67 /* LocalNotificationManager+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalNotificationManager+Extensions.swift"; sourceTree = "<group>"; };
 		7CD6FC8527188F2B006C1B88 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
+		7CDEB0A3271C9FCB001FD613 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		7CE13E46270F0752004F745C /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		7CF63D6A2719B5A600D4E04C /* NotificationImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotificationImage.png; sourceTree = "<group>"; };
 		8B455F03830C5B0C90CC614A /* Pods-ToDoAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoAppTests.release.xcconfig"; path = "Target Support Files/Pods-ToDoAppTests/Pods-ToDoAppTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 			children = (
 				7CBB40DE271B08B700D0EE67 /* Date+Extensions.swift */,
 				7CBB40E0271B0BC600D0EE67 /* LocalNotificationManager+Extensions.swift */,
+				7CDEB0A3271C9FCB001FD613 /* UIViewController+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 				7CBB40DF271B08B700D0EE67 /* Date+Extensions.swift in Sources */,
 				7C4E0E82270488DF00BFB87A /* SceneDelegate.swift in Sources */,
 				7CE13E47270F0752004F745C /* DetailsViewController.swift in Sources */,
+				7CDEB0A4271C9FCB001FD613 /* UIViewController+Extensions.swift in Sources */,
 				7CD6FC8627188F2B006C1B88 /* LocalNotificationManager.swift in Sources */,
 				7C7838CB2704D5A600AFFA9A /* K.swift in Sources */,
 				7C7838C82704D1CE00AFFA9A /* CoreDataManager.swift in Sources */,

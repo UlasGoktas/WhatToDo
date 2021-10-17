@@ -21,6 +21,8 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.setupHideKeyboardWhenTapOutside()
+
         titleTextField.text = selectedTodo?.title
         detailTextField.text = selectedTodo?.detail
 
@@ -38,7 +40,6 @@ class DetailsViewController: UIViewController {
 
         // Create edit button
         self.navigationItem.rightBarButtonItem = self.editButtonItem
-        editButtonItem.image = UIImage(systemName: "square.and.pencil")
 
         createDatePicker()
 
@@ -96,8 +97,14 @@ class DetailsViewController: UIViewController {
         }
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done,
                                          target: nil, action: #selector(datePickerDoneButtonTapped))
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel,
+                                          target: nil, action: #selector(datePickerCancelButtonTapped))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace,
+                                            target: nil, action: nil)
+
         doneButton.tintColor = UIColor(named: K.BrandColors.button)
-        toolbar.setItems([doneButton], animated: true)
+        cancelButton.tintColor = UIColor(named: K.BrandColors.button)
+        toolbar.setItems([cancelButton, flexibleSpace, doneButton], animated: true)
 
         completionTimeTextField.inputAccessoryView = toolbar
 
@@ -111,6 +118,11 @@ class DetailsViewController: UIViewController {
     @objc func datePickerDoneButtonTapped() {
         isDatePicked = true
         completionTimeTextField.text = datePicker.date.timeToString()
+        self.view.endEditing(true)
+    }
+
+    @objc func datePickerCancelButtonTapped() {
+        completionTimeTextField.text = ""
         self.view.endEditing(true)
     }
 }
