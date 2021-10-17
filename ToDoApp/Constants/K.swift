@@ -19,6 +19,13 @@ struct K {
 
     }
 
+    struct BrandColors {
+
+        static let button = "ButtonColor"
+        static let background = "BackgroundColor"
+        static let text = "TextColor"
+    }
+
     struct Notification {
 
         static let imageName = "NotificationImage"

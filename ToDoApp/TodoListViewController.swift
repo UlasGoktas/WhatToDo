@@ -79,6 +79,8 @@ class TodoListViewController: UITableViewController {
 
             self.coreDataManager.saveObject(title: todoName, detail: nil, completionTime: nil)
         }
+        cancelAction.setValue(UIColor(named: K.BrandColors.button), forKey: "titleTextColor")
+        addAction.setValue(UIColor(named: K.BrandColors.button), forKey: "titleTextColor")
 
         alert.addAction(cancelAction)
         alert.addAction(addAction)
@@ -106,6 +108,10 @@ extension TodoListViewController: UISearchBarDelegate {
 
         let screenWidth: CGFloat = self.view.bounds.width
         let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 70))
+
+        searchBar.barTintColor = UIColor(named: K.BrandColors.background)
+        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.textColor = UIColor(named: K.BrandColors.text)
 
         searchBar.showsScopeBar = true
         searchBar.scopeButtonTitles = [K.SearchBar.scopeButtonTitle, K.SearchBar.scopeButtonModifyTime]

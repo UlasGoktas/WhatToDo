@@ -89,6 +89,7 @@ class DetailsViewController: UIViewController {
         }
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done,
                                          target: nil, action: #selector(datePickerDoneButtonTapped))
+        doneButton.tintColor = UIColor(named: K.BrandColors.button)
         toolbar.setItems([doneButton], animated: true)
 
         completionTimeTextField.inputAccessoryView = toolbar
