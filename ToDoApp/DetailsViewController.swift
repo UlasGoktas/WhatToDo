@@ -37,6 +37,7 @@ class DetailsViewController: UIViewController {
 
         // Create edit button
         self.navigationItem.rightBarButtonItem = self.editButtonItem
+        editButtonItem.image = UIImage(systemName: "square.and.pencil")
 
         createDatePicker()
 
@@ -52,11 +53,13 @@ class DetailsViewController: UIViewController {
         super.setEditing(editing, animated: animated)
 
         if self.isEditing {
-            self.editButtonItem.title = "Done"
+//            self.editButtonItem.title = "Done"
+            self.editButtonItem.image = UIImage(systemName: "checkmark")
             toggleUserInteraction()
 
         } else {
-            self.editButtonItem.title = "Edit"
+//            self.editButtonItem.title = "Edit"
+            self.editButtonItem.image = UIImage(systemName: "square.and.pencil")
             coreDataManager.updateObject(
                 todoId: selectedTodo.id!,
                 title: titleTextField.text ?? "",
