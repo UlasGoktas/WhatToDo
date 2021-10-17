@@ -16,6 +16,7 @@ class DetailsViewController: UIViewController {
     var selectedTodo: Todo!
     var coreDataManager = CoreDataManager()
     let datePicker = UIDatePicker()
+    private var isDatePicked = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +54,7 @@ class DetailsViewController: UIViewController {
 
         if self.isEditing {
             self.editButtonItem.title = "Done"
+            isDatePicked = false
             toggleUserInteraction()
 
         } else {
@@ -61,7 +63,7 @@ class DetailsViewController: UIViewController {
                 todoId: selectedTodo.id!,
                 title: titleTextField.text ?? "",
                 detail: detailTextField.text ?? "",
-                completionTime: datePicker.date)
+                completionTime: isDatePicked ? datePicker.date : nil)
 
             // Call notification
             if let completionTime = selectedTodo.completionTime, let todoName = selectedTodo.title {
@@ -102,7 +104,7 @@ class DetailsViewController: UIViewController {
     }
 
     @objc func datePickerDoneButtonTapped() {
-
+        isDatePicked = true
         completionTimeTextField.text = datePicker.date.timeToString()
         self.view.endEditing(true)
     }
