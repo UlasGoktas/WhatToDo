@@ -63,11 +63,15 @@ class DetailsViewController: UIViewController {
                 todoId: selectedTodo.id!,
                 title: titleTextField.text ?? "",
                 detail: detailTextField.text ?? "",
+                // Can't assign datePicker.date directly. datepicker.date has default date even is not picked.
                 completionTime: isDatePicked ? datePicker.date : nil)
 
             // Call notification
             if let completionTime = selectedTodo.completionTime, let todoName = selectedTodo.title {
-                LocalNotificationManager.shared.scheduledNotificationRequest(with: completionTime, with: todoName)
+                // If completionTime passed don't trigger notification.
+                if completionTime > Date() {
+                    LocalNotificationManager.shared.scheduledNotificationRequest(with: completionTime, with: todoName)
+                }
             }
 
             toggleUserInteraction()
