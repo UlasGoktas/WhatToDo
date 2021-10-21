@@ -15,11 +15,24 @@ class TodoDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupHideKeyboardWhenTapOutside()
-
         configureDatePicker()
         configureNavigationBar()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(todoDetailsChanged),
+                                               name: Notification.Name.todoListNeedUpdate,
+                                               object: nil)
 
         viewModel.viewDidLoad()
+
+        NotificationCenter.default.addObserver(
+            forName: UITextField.textDidChangeNotification,
+            object: titleTextField,
+            queue: OperationQueue.main) { _ in
+                self.editButtonItem.isEnabled = self.titleTextField.text!.count > 0
+            }
+    }
+    @objc private func todoDetailsChanged() {
+        print("Todo Details Changed")
     }
 
     var viewModel: TodoDetailsViewModelProtocol! {
@@ -31,12 +44,15 @@ class TodoDetailsViewController: UIViewController {
     let datePicker = UIDatePicker()
     private var isDatePicked = false
 
+    // MARK: - Configure Navigation Bar
+
     func configureNavigationBar() {
         self.title = "Details"
         self.navigationController?.navigationBar.tintColor = UIColor(named: K.BrandColors.button)
         self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
+    // MARK: - Configure Date Picker
     func configureDatePicker() {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
@@ -77,6 +93,7 @@ class TodoDetailsViewController: UIViewController {
     }
 
     @objc func datePickerCancelButtonTapped() {
+        completionDateTextField.text = ""
         self.view.endEditing(true)
     }
 
@@ -92,16 +109,18 @@ class TodoDetailsViewController: UIViewController {
             viewModel.updateTodo(with: selectedTodo.id,
                                  title: titleTextField.text!,
                                  description: descriptionTextField.text ?? "",
-            // Can't assign datePicker.date directly. datepicker.date has default date even is not picked.
+        // Can't assign datePicker.date directly. datepicker.date has default date even is not picked.
                                  completionDate: isDatePicked ? datePicker.date : nil)
+
+            NotificationCenter.default.post(name: Notification.Name.todoListNeedUpdate, object: nil)
 
             // If completionDate passed don't trigger notification.
             if datePicker.date > Date() {
                 print(datePicker.date)
-                    LocalNotificationManager.shared.scheduledNotificationRequest(
-                        with: datePicker.date,
-                        with: titleTextField.text!)
-                }
+                LocalNotificationManager.shared.scheduledNotificationRequest(
+                    with: datePicker.date,
+                    with: titleTextField.text!)
+            }
             toggleUserInteraction()
         }
     }
@@ -116,13 +135,6 @@ class TodoDetailsViewController: UIViewController {
 extension TodoDetailsViewController: TodoDetailsViewModelDelegate {
     func showTodoDetails(_ todo: TodoDetailsPresentation) {
         selectedTodo = todo
-        titleTextField.placeholder = "Todo title"
-        descriptionTextField.placeholder = "Todo description"
-        completionDateTextField.placeholder = "Todo completion date"
-
-        titleTextField.isUserInteractionEnabled = false
-        descriptionTextField.isUserInteractionEnabled = false
-        completionDateTextField.isUserInteractionEnabled = false
 
         titleTextField.text = todo.title
         descriptionTextField.text = todo.description

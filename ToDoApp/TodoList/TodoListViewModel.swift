@@ -9,8 +9,6 @@ import Foundation
 import UIKit
 
 class TodoListViewModel: TodoListViewModelProtocol {
-    
-    
     weak var delegate: TodoListViewModelDelegate?
 
     private let service: CoreDataManagerProtocol!
@@ -37,9 +35,5 @@ class TodoListViewModel: TodoListViewModelProtocol {
 
     func saveTodo(title: String) {
         service.saveTodo(title: title)
-    }
-
-    func addTodoForTableView() {
-        
     }
 }

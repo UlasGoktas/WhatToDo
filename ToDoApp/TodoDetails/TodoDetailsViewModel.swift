@@ -6,7 +6,6 @@
 //
 
 import Foundation
-
 class TodoDetailsViewModel: TodoDetailsViewModelProtocol {
     weak var delegate: TodoDetailsViewModelDelegate?
 

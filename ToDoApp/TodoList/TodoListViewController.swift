@@ -15,11 +15,11 @@ class TodoListViewController: UIViewController {
         super.viewDidLoad()
         LocalNotificationManager.shared.authorizeNotification()
         configureNavigationBar()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateTodoList),
+                                               name: Notification.Name.todoListNeedUpdate,
+                                               object: nil)
 
-        viewModel.viewDidLoad()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
         viewModel.viewDidLoad()
     }
 
@@ -31,12 +31,16 @@ class TodoListViewController: UIViewController {
         }
     }
 
+    @objc private func updateTodoList() {
+        viewModel.viewDidLoad()
+    }
+
     @objc func orderByDateTapped() {
         //TODO: order by date fonksiyonunu iyilestir
-//        filteredTodoList.sort { $0.modifyDate > $1.modifyDate }
-        filteredTodoList.sort(by: {
-            $0.modifyDate.compare($1.modifyDate) == .orderedDescending
-        })
+        filteredTodoList.sort { $0.modifyDate > $1.modifyDate }
+//        filteredTodoList.sort(by: {
+//            $0.modifyDate.compare($1.modifyDate) == .orderedDescending
+//        })
         self.tableView.reloadData()
     }
 
@@ -70,7 +74,7 @@ class TodoListViewController: UIViewController {
             guard let todoName = alert.textFields?[0].text else { return }
 
             self.viewModel.saveTodo(title: todoName)
-            self.viewModel.viewDidLoad()
+            NotificationCenter.default.post(name: Notification.Name.todoListNeedUpdate, object: nil)
         }
         cancelAction.setValue(UIColor(named: K.BrandColors.button), forKey: "titleTextColor")
         addAction.setValue(UIColor(named: K.BrandColors.button), forKey: "titleTextColor")
@@ -91,6 +95,8 @@ class TodoListViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
 }
+
+// MARK: - TodoListViewModel Delegate Methods
 
 extension TodoListViewController: TodoListViewModelDelegate {
     func handleOutput(_ output: TodoListViewModelOutput) {
