@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+// Dismiss the keyboard when tap outside of ui elements.
 extension UIViewController {
     func setupHideKeyboardWhenTapOutside() {
         self.view.addGestureRecognizer(self.endEditingRecognizer())

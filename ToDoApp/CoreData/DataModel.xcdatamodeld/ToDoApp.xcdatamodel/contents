@@ -4,7 +4,7 @@
         <attribute name="completionTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="detail" optional="YES" attributeType="String"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="modifyTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="modifyTime" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" attributeType="String"/>
     </entity>
     <elements>

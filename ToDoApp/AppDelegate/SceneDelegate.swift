@@ -14,7 +14,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession,
                options connectionOptions: UIScene.ConnectionOptions) {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        guard (scene as? UIWindowScene) != nil else { return }
+//        guard (scene as? UIWindowScene) != nil else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        self.window = appContainer.router.start(scene: windowScene)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

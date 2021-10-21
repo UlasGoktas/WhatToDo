@@ -9,8 +9,9 @@ import Foundation
 
 struct K {
 
-    static let todoCellIdentifier = "ToDoItemCell"
+    static let todoCellIdentifier = "TodoItemCell"
     static let detailSegue = "goToDetails"
+    static let storyboardName = "TodoList"
 
     struct SearchBar {
 

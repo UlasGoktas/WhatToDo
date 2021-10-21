@@ -8,22 +8,27 @@
 import UIKit
 import CoreData
 
-class CoreDataManager: NSObject {
+protocol CoreDataManagerProtocol {
+    func getContext() -> NSManagedObjectContext
+    func saveTodo(title: String)
+    func updateTodo(with todoId: UUID, title: String, description: String?, completionDate: Date?)
+    func fetchTodoList() -> [Todo]
+}
 
-    private func getContext() -> NSManagedObjectContext {
+class CoreDataManager: CoreDataManagerProtocol {
+
+    func getContext() -> NSManagedObjectContext {
         let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
         return appDelegate.persistentContainer.viewContext
     }
 
     // Save object into Core Data
-    func saveObject(title: String, detail: String?, completionTime: Date?) {
+    func saveTodo(title: String) {
         let context = getContext()
         let newTodo = Todo(context: context)
 
         newTodo.id = UUID()
         newTodo.title = title
-        newTodo.detail = detail
-        newTodo.completionTime = completionTime
         newTodo.modifyTime = Date()
 
         do {
@@ -33,7 +38,7 @@ class CoreDataManager: NSObject {
         }
     }
 
-    func updateObject(todoId: UUID, title: String, detail: String?, completionTime: Date?) {
+    func updateTodo(with todoId: UUID, title: String, description: String?, completionDate: Date?) {
         let context = getContext()
 
         let fetchRequest: NSFetchRequest<Todo> = Todo.fetchRequest()
@@ -45,8 +50,8 @@ class CoreDataManager: NSObject {
             let objectUpdate = object.first
 
             objectUpdate?.title = title
-            objectUpdate?.detail = detail
-            objectUpdate?.completionTime = completionTime
+            objectUpdate?.detail = description
+            objectUpdate?.completionTime = completionDate
             objectUpdate?.modifyTime = Date()
 
             do {
@@ -59,36 +64,16 @@ class CoreDataManager: NSObject {
         }
     }
 
-    func fetchObject(selectedScopeIndex: Int? = nil, searchText: String? = nil) -> [Todo] {
-        var todoArray = [Todo]()
-
+    func fetchTodoList() -> [Todo] {
+        var todoList = [Todo]()
         let fetchRequest: NSFetchRequest<Todo> = Todo.fetchRequest()
 
-        if let index = selectedScopeIndex, let searchText = searchText {
-
-            if index == K.SearchFilters.titleSearchIndex {
-
-                let predicate = NSPredicate(
-                    format: "\(K.SearchFilters.titleFilter) \(K.SearchFilters.filterRule)", searchText)
-                fetchRequest.predicate = predicate
-
-            } else if index == K.SearchFilters.timeSearchIndex {
-
-                let sortDate = NSSortDescriptor(key: K.SearchFilters.modifyTimeFilter, ascending: false)
-                fetchRequest.sortDescriptors = [sortDate]
-
-            }
-
-        }
-
         do {
-            let fetchResult = try getContext().fetch(fetchRequest)
-            todoArray = fetchResult
+            todoList = try getContext().fetch(fetchRequest)
         } catch {
             print(error.localizedDescription)
         }
 
-        return todoArray
+        return todoList
     }
-
 }
