@@ -11,8 +11,9 @@ import CoreData
 protocol CoreDataManagerProtocol {
     func getContext() -> NSManagedObjectContext
     func saveTodo(title: String)
-    func updateTodo(with todoId: UUID, title: String, description: String?, completionDate: Date?)
     func fetchTodoList() -> [Todo]
+    func updateTodo(with todoId: UUID, title: String, description: String?, completionDate: Date?)
+    func deleteTodo(todo: Todo)
 }
 
 class CoreDataManager: CoreDataManagerProtocol {
@@ -36,6 +37,20 @@ class CoreDataManager: CoreDataManagerProtocol {
         } catch {
             print(error.localizedDescription)
         }
+    }
+
+    func fetchTodoList() -> [Todo] {
+        let context = getContext()
+        var todoList = [Todo]()
+        let fetchRequest: NSFetchRequest<Todo> = Todo.fetchRequest()
+
+        do {
+            todoList = try context.fetch(fetchRequest)
+        } catch {
+            print(error.localizedDescription)
+        }
+
+        return todoList
     }
 
     func updateTodo(with todoId: UUID, title: String, description: String?, completionDate: Date?) {
@@ -64,16 +79,14 @@ class CoreDataManager: CoreDataManagerProtocol {
         }
     }
 
-    func fetchTodoList() -> [Todo] {
-        var todoList = [Todo]()
-        let fetchRequest: NSFetchRequest<Todo> = Todo.fetchRequest()
+    func deleteTodo(todo: Todo) {
+        let context = getContext()
 
         do {
-            todoList = try getContext().fetch(fetchRequest)
+            context.delete(todo)
+            try context.save()
         } catch {
             print(error.localizedDescription)
         }
-
-        return todoList
     }
 }

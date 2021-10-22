@@ -30,6 +30,7 @@ class TodoListViewController: UIViewController {
             viewModel.delegate = self
         }
     }
+//    var deleteTodoIndexPath: NSIndexPath?
 
     @objc private func updateTodoList() {
         viewModel.viewDidLoad()
@@ -125,6 +126,16 @@ extension TodoListViewController: TodoListViewModelDelegate {
 extension TodoListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.didSelectRow(at: indexPath)
+    }
+
+    func tableView(_ tableView: UITableView,
+                   commit editingStyle: UITableViewCell.EditingStyle,
+                   forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            filteredTodoList.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            viewModel.deleteTodo(with: indexPath.row)
+        }
     }
 }
 

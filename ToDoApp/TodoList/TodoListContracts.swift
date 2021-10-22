@@ -12,6 +12,7 @@ protocol TodoListViewModelProtocol {
     func viewDidLoad()
     func didSelectRow(at indexPath: IndexPath)
     func saveTodo(title: String)
+    func deleteTodo(with index: Int)
 }
 
 enum TodoListViewModelOutput {

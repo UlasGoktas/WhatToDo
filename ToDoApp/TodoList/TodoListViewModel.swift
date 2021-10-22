@@ -36,4 +36,8 @@ class TodoListViewModel: TodoListViewModelProtocol {
     func saveTodo(title: String) {
         service.saveTodo(title: title)
     }
+
+    func deleteTodo(with index: Int) {
+        service.deleteTodo(todo: todoList[index])
+    }
 }
