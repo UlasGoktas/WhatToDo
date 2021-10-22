@@ -12,6 +12,7 @@ class TodoDetailsViewModel: TodoDetailsViewModelProtocol {
 //    private let service: CoreDataManagerProtocol!
     private var todo: Todo
     private let coreDataManager = CoreDataManager()
+    private let localNotificationManager = LocalNotificationManager()
 
 //    init(service: CoreDataManagerProtocol) {
 //        self.service = service
@@ -27,5 +28,13 @@ class TodoDetailsViewModel: TodoDetailsViewModelProtocol {
 
     func updateTodo(with todoId: UUID, title: String, description: String?, completionDate: Date?) {
         coreDataManager.updateTodo(with: todoId, title: title, description: description, completionDate: completionDate)
+    }
+
+    func sendNotification(selectedDate: Date, todoTitle: String) {
+        if selectedDate.isDatePassed() {
+            localNotificationManager.scheduledNotificationRequest(
+                with: selectedDate,
+                with: todoTitle)
+        }
     }
 }

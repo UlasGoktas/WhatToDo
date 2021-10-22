@@ -13,6 +13,11 @@ protocol TodoListViewModelProtocol {
     func didSelectRow(at indexPath: IndexPath)
     func saveTodo(title: String)
     func deleteTodo(with index: Int)
+    func orderTodoListByDate(todoList: inout [TodoListPresentation])
+    func searchMechanism(filteredList: inout [TodoListPresentation],
+                         originalList: [TodoListPresentation],
+                         searchText: String)
+    func initializeNotification()
 }
 
 enum TodoListViewModelOutput {

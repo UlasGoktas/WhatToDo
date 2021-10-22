@@ -7,15 +7,6 @@
 
 import UIKit
 import CoreData
-
-protocol CoreDataManagerProtocol {
-    func getContext() -> NSManagedObjectContext
-    func saveTodo(title: String)
-    func fetchTodoList() -> [Todo]
-    func updateTodo(with todoId: UUID, title: String, description: String?, completionDate: Date?)
-    func deleteTodo(todo: Todo)
-}
-
 class CoreDataManager: CoreDataManagerProtocol {
 
     func getContext() -> NSManagedObjectContext {

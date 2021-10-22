@@ -13,6 +13,7 @@ class TodoListViewModel: TodoListViewModelProtocol {
 
     private let service: CoreDataManagerProtocol!
     private var todoList = [Todo]()
+    private let localNotificationManager = LocalNotificationManager()
 
     init(service: CoreDataManagerProtocol) {
         self.service = service
@@ -39,5 +40,29 @@ class TodoListViewModel: TodoListViewModelProtocol {
 
     func deleteTodo(with index: Int) {
         service.deleteTodo(todo: todoList[index])
+    }
+
+    func orderTodoListByDate(todoList: inout [TodoListPresentation]) {
+        todoList.sort { $0.modifyDate > $1.modifyDate }
+    }
+
+    func searchMechanism(filteredList: inout [TodoListPresentation],
+                         originalList: [TodoListPresentation],
+                         searchText: String) {
+
+        filteredList.removeAll()
+        if searchText.count == 0 {
+            filteredList = originalList
+        } else {
+            for todo in originalList {
+                if todo.title.isMatching(with: searchText) {
+                    filteredList.append(todo)
+                }
+            }
+        }
+    }
+
+    func initializeNotification() {
+        localNotificationManager.authorizeNotification()
     }
 }

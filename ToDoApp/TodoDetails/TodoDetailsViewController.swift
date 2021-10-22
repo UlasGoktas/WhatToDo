@@ -21,18 +21,13 @@ class TodoDetailsViewController: UIViewController {
                                                selector: #selector(todoDetailsChanged),
                                                name: Notification.Name.todoListNeedUpdate,
                                                object: nil)
-
-        viewModel.viewDidLoad()
-
         NotificationCenter.default.addObserver(
             forName: UITextField.textDidChangeNotification,
             object: titleTextField,
             queue: OperationQueue.main) { _ in
                 self.editButtonItem.isEnabled = self.titleTextField.text!.count > 0
             }
-    }
-    @objc private func todoDetailsChanged() {
-        print("Todo Details Changed")
+        viewModel.viewDidLoad()
     }
 
     var viewModel: TodoDetailsViewModelProtocol! {
@@ -86,6 +81,10 @@ class TodoDetailsViewController: UIViewController {
         datePicker.datePickerMode = .dateAndTime
     }
 
+    @objc private func todoDetailsChanged() {
+//        print("Todo Details Changed")
+    }
+
     @objc func datePickerDoneButtonTapped() {
         isDatePicked = true
         completionDateTextField.text = datePicker.date.timeToString()
@@ -109,18 +108,13 @@ class TodoDetailsViewController: UIViewController {
             viewModel.updateTodo(with: selectedTodo.id,
                                  title: titleTextField.text!,
                                  description: descriptionTextField.text ?? "",
-        // Can't assign datePicker.date directly. datepicker.date has default date even is not picked.
+        // Shouldn't assign datePicker.date directly. datepicker.date has default date even is not picked.
                                  completionDate: isDatePicked ? datePicker.date : nil)
 
             NotificationCenter.default.post(name: Notification.Name.todoListNeedUpdate, object: nil)
 
-            // If completionDate passed don't trigger notification.
-            if datePicker.date > Date() {
-                print(datePicker.date)
-                LocalNotificationManager.shared.scheduledNotificationRequest(
-                    with: datePicker.date,
-                    with: titleTextField.text!)
-            }
+            viewModel.sendNotification(selectedDate: datePicker.date, todoTitle: titleTextField.text!)
+
             toggleUserInteraction()
         }
     }

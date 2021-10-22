@@ -9,46 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--To Do List-->
-        <scene sceneID="6UI-p4-Wxf">
-            <objects>
-                <tableViewController storyboardIdentifier="TodoListTableViewController" id="idY-ca-nnf" customClass="TodoListTableViewController" customModule="What_To_Do" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="IK8-Tm-pxz">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="BackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="c2o-lI-w3z">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="c2o-lI-w3z" id="ERU-dZ-Tim">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" name="BackgroundColor"/>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="idY-ca-nnf" id="jSj-bU-2tX"/>
-                            <outlet property="delegate" destination="idY-ca-nnf" id="ouX-fm-oMf"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="To Do List" id="e21-Jl-eHE">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="NTY-Vn-yOV">
-                            <color key="tintColor" name="ButtonColor"/>
-                            <connections>
-                                <action selector="addButtonTapped:" destination="idY-ca-nnf" id="7GF-3v-07U"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <segue destination="CAR-S2-m8V" kind="show" identifier="goToDetails" id="4bw-Hh-fss"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="N34-a4-FYN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1362" y="129"/>
-        </scene>
         <!--Todo List View Controller-->
         <scene sceneID="ewE-DO-wTA">
             <objects>
@@ -60,7 +20,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="aol-wy-Cwp">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" name="BackgroundColor"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" id="r4a-ap-6kZ">
+                                <searchBar key="tableHeaderView" contentMode="redraw" showsCancelButton="YES" id="r4a-ap-6kZ">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <color key="barTintColor" name="BackgroundColor"/>
@@ -105,81 +65,6 @@
             </objects>
             <point key="canvasLocation" x="1361" y="852"/>
         </scene>
-        <!--Details-->
-        <scene sceneID="IKq-RW-gUI">
-            <objects>
-                <viewController id="CAR-S2-m8V" customClass="TodoDetailViewController" customModule="What_To_Do" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="jAh-bL-45U">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="cMq-EG-SZL">
-                                <rect key="frame" x="50" y="148" width="314" height="202"/>
-                                <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jeX-6G-3lA">
-                                        <rect key="frame" x="0.0" y="0.0" width="314" height="34"/>
-                                        <color key="backgroundColor" name="BackgroundColor"/>
-                                        <color key="textColor" name="TextColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wbg-qy-RFb">
-                                        <rect key="frame" x="0.0" y="84" width="314" height="34"/>
-                                        <color key="backgroundColor" name="BackgroundColor"/>
-                                        <color key="textColor" name="TextColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fZF-5U-KwR">
-                                        <rect key="frame" x="0.0" y="168" width="314" height="34"/>
-                                        <color key="backgroundColor" name="BackgroundColor"/>
-                                        <color key="textColor" name="TextColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="OSn-Rh-pOR"/>
-                        <color key="backgroundColor" name="BackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="cMq-EG-SZL" firstAttribute="top" secondItem="OSn-Rh-pOR" secondAttribute="top" constant="60" id="4Xy-px-MG8"/>
-                            <constraint firstItem="OSn-Rh-pOR" firstAttribute="trailing" secondItem="cMq-EG-SZL" secondAttribute="trailing" constant="50" id="aSB-aV-YHa"/>
-                            <constraint firstItem="cMq-EG-SZL" firstAttribute="leading" secondItem="OSn-Rh-pOR" secondAttribute="leading" constant="50" id="zm7-EB-Gim"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Details" id="lAp-xP-v5B"/>
-                    <connections>
-                        <outlet property="completionTimeTextField" destination="fZF-5U-KwR" id="BVF-Ys-Agz"/>
-                        <outlet property="detailTextField" destination="Wbg-qy-RFb" id="ElS-PY-NnA"/>
-                        <outlet property="titleTextField" destination="jeX-6G-3lA" id="Dsj-oX-tPG"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="k4r-ER-wdh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2263.768115942029" y="128.57142857142856"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="tBD-N3-tlG">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YDa-Ty-OEh" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UUl-UT-c1M">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="18"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="idY-ca-nnf" kind="relationship" relationship="rootViewController" id="UsQ-Ba-Qk0"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ey3-xP-SbF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="444.92753623188412" y="128.57142857142856"/>
-        </scene>
     </scenes>
     <color key="tintColor" name="ButtonColor"/>
     <resources>
@@ -188,9 +73,6 @@
         </namedColor>
         <namedColor name="ButtonColor">
             <color red="0.21600000560283661" green="0.44299998879432678" blue="0.87800002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="TextColor">
-            <color red="0.32899999618530273" green="0.3449999988079071" blue="0.36100000143051147" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

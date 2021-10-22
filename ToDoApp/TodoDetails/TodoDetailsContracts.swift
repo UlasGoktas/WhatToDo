@@ -11,6 +11,7 @@ protocol TodoDetailsViewModelProtocol {
     var delegate: TodoDetailsViewModelDelegate? { get set }
     func viewDidLoad()
     func updateTodo(with todoId: UUID, title: String, description: String?, completionDate: Date?)
+    func sendNotification(selectedDate: Date, todoTitle: String)
 }
 
 protocol TodoDetailsViewModelDelegate: AnyObject {

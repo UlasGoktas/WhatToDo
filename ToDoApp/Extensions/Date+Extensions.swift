@@ -16,4 +16,12 @@ extension Date {
 
         return formattedString
     }
+
+    func isDatePassed() -> Bool {
+        if self > Date() {
+            return true
+        } else {
+            return false
+        }
+    }
 }

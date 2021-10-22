@@ -7,12 +7,8 @@
 
 import Foundation
 import UserNotifications
-import UIKit
 
 class LocalNotificationManager: NSObject {
-
-    private override init() {}
-    static let shared = LocalNotificationManager()
 
     let center = UNUserNotificationCenter.current()
 

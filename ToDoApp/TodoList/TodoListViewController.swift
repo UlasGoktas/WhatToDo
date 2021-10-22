@@ -13,7 +13,7 @@ class TodoListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        LocalNotificationManager.shared.authorizeNotification()
+        viewModel.initializeNotification()
         configureNavigationBar()
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(updateTodoList),
@@ -30,18 +30,14 @@ class TodoListViewController: UIViewController {
             viewModel.delegate = self
         }
     }
-//    var deleteTodoIndexPath: NSIndexPath?
 
     @objc private func updateTodoList() {
         viewModel.viewDidLoad()
     }
 
     @objc func orderByDateTapped() {
-        //TODO: order by date fonksiyonunu iyilestir
-        filteredTodoList.sort { $0.modifyDate > $1.modifyDate }
-//        filteredTodoList.sort(by: {
-//            $0.modifyDate.compare($1.modifyDate) == .orderedDescending
-//        })
+        // TODO: gelen listenin goruntusu degisiyor fakat elemanlari hala eski sirada geliyor
+        viewModel.orderTodoListByDate(todoList: &filteredTodoList)
         self.tableView.reloadData()
     }
 
@@ -51,6 +47,9 @@ class TodoListViewController: UIViewController {
 
     func configureNavigationBar() {
         self.title = "Todo List"
+        self.navigationController?.navigationBar.titleTextAttributes =
+        [NSAttributedString.Key.font: UIFont(name: "Helvetica", size: 24)!]
+
         navigationController?.navigationBar.tintColor = UIColor(named: K.BrandColors.button)
         let addTodoBarButton = UIBarButtonItem(
             image: UIImage(systemName: "plus"),
@@ -127,7 +126,7 @@ extension TodoListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.didSelectRow(at: indexPath)
     }
-
+    // Swipe to delete function
     func tableView(_ tableView: UITableView,
                    commit editingStyle: UITableViewCell.EditingStyle,
                    forRowAt indexPath: IndexPath) {
@@ -150,6 +149,7 @@ extension TodoListViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.todoCellIdentifier, for: indexPath)
         let todo = filteredTodoList[indexPath.row]
         cell.textLabel?.text = todo.title
+        cell.textLabel?.font = UIFont.init(name: "Helvetica", size: 21)
         return cell
     }
 }
@@ -157,22 +157,14 @@ extension TodoListViewController: UITableViewDataSource {
 // MARK: - Search Bar Metods
 
 extension TodoListViewController: UISearchBarDelegate {
-    //TODO: arama kodunu biraz daha gelistir
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filteredTodoList.removeAll()
-        if searchText.count == 0 {
-            filteredTodoList = todoList
-
-            DispatchQueue.main.async {
-                searchBar.resignFirstResponder()
-            }
-        } else {
-            for todo in todoList {
-                if todo.title.isMatching(with: searchText) {
-                    filteredTodoList.append(todo)
-                }
-            }
-        }
+        viewModel.searchMechanism(filteredList: &filteredTodoList, originalList: todoList, searchText: searchText)
         self.tableView.reloadData()
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        DispatchQueue.main.async {
+            searchBar.resignFirstResponder()
+        }
     }
 }
