@@ -24,10 +24,15 @@ class TodoDetailsViewController: UIViewController {
         NotificationCenter.default.addObserver(
             forName: UITextField.textDidChangeNotification,
             object: titleTextField,
-            queue: OperationQueue.main) { _ in
-                self.editButtonItem.isEnabled = self.titleTextField.text!.count > 0
+            // There was memory leak before [weak self]
+            queue: OperationQueue.main) { [weak self] _ in
+                self!.editButtonItem.isEnabled = self!.titleTextField.text!.count > 0
             }
         viewModel.viewDidLoad()
+    }
+
+    deinit {
+        print("TodoDetailsViewController deinited")
     }
 
     var viewModel: TodoDetailsViewModelProtocol! {
