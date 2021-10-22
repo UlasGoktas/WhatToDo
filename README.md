@@ -24,11 +24,12 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
+        <li><a href="#pods">Pods</a></li>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#Screenshots">Screenshots</a></li>
+    <li><a href="#screenshots">Screenshots</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
@@ -38,13 +39,14 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+What To Do is a simple To-do app written in Swift with Core Data.
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Built With
 
 * [Swift 5](https://swift.org/blog/swift-5-released/)
 * [Core Data](https://developer.apple.com/documentation/coredata)
-* [Cocoapods](https://cocoapods.org)
 * [MVVM](https://en.wikipedia.org/wiki/Model–view–viewmodel)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -95,6 +97,8 @@
 <!-- LICENSE -->
 ## License
 
+Distributed under the MIT License. See `LICENSE` for more information.
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- CONTACT -->
@@ -109,5 +113,12 @@ Project Link:
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
+
+* [MVVM Design Pattern by Ray Wenderlich](https://www.raywenderlich.com/34-design-patterns-by-tutorials-mvvm)
+* [iOS Notifications Udemy Course](https://www.udemy.com/course/ios-push-notifications/)
+* [Core Data in iOS Udemy Course](https://www.udemy.com/course/core-data-in-ios/)
+* [Notification Center by Cocoacasts](https://cocoacasts.com/what-is-notification-name-and-how-to-use-it)
+* [iOS Academy on Youtube](https://www.youtube.com/c/iOSAcademy)
+* [Hacking With Swift](https://www.hackingwithswift.com)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
