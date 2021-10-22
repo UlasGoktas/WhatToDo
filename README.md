@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <div align="center">
   <a href="https://github.com/UlasGoktas/ToDoApp">
-    <img src="images/logo.png" alt="Logo" width="120" height="120">
+    <img src="images/logo.png" alt="Logo" width="200" height="200">
   </a>
 
   <h3 align="center">What To Do</h3>
@@ -42,6 +42,11 @@
 
 ### Built With
 
+* [Swift 5](https://swift.org/blog/swift-5-released/)
+* [Core Data](https://developer.apple.com/documentation/coredata)
+* [Cocoapods](https://cocoapods.org)
+* [MVVM](https://en.wikipedia.org/wiki/Model–view–viewmodel)
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
@@ -49,7 +54,30 @@
 
 ### Prerequisites
 
+* iOS 13.0
+* Xcode 11.0
+* cocoapods
+  ```sh
+  sudo gem install cocoapods
+  ```
+
 ### Installation
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/UlasGoktas/ToDoApp.git
+   ```
+2. Install Pods
+   ```sh
+   pod install
+   ```
+3. Open Xcode workspace
+   ```sh
+   open ToDoApp.xcworkspace
+   ```
+
+### Pods
+* [SwiftLint](https://cocoapods.org/pods/SwiftLint)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -67,6 +95,11 @@
 
 <!-- CONTACT -->
 ## Contact
+
+Ugur Ulas Goktas - u.ulas.goktas@gmail.com
+
+Project Link:
+    [https://github.com/UlasGoktas/ToDoApp](https://github.com/UlasGoktas/ToDoApp)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
