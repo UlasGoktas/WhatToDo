@@ -179,7 +179,6 @@
 			isa = PBXGroup;
 			children = (
 				7C4E0E7E270488DF00BFB87A /* ToDoApp */,
-				7C7838CA2704D5A600AFFA9A /* K.swift */,
 				7C4E0E98270488E200BFB87A /* ToDoAppTests */,
 				7C4E0EA2270488E200BFB87A /* ToDoAppUITests */,
 				7C4E0E7D270488DF00BFB87A /* Products */,
@@ -208,6 +207,7 @@
 				7C7838C92704D26200AFFA9A /* Database */,
 				7C7838C52704D15900AFFA9A /* SupportingFiles */,
 				7CBB40DD271B081900D0EE67 /* Extensions */,
+				7C7838CA2704D5A600AFFA9A /* K.swift */,
 			);
 			path = ToDoApp;
 			sourceTree = "<group>";
