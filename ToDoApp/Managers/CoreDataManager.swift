@@ -7,77 +7,77 @@
 
 import UIKit
 import CoreData
+class CoreDataManager: CoreDataManagerProtocol {
 
-class CoreDataManager {
-    
-    struct TodoItem {
-        var title: String?
-        var detail: String?
-        var completionTime: Date?
-        var modifyTime: Date?
-    }
-    
-    private class func getContext() -> NSManagedObjectContext {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    func getContext() -> NSManagedObjectContext {
+        let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
         return appDelegate.persistentContainer.viewContext
     }
-    
-    //save object into Core Data
-    class func saveObject(title: String, detail: String?, completionTime: Date?, modifyTime: Date?) {
-        
+
+    // Save object into Core Data
+    func saveTodo(title: String) {
         let context = getContext()
-        let entity = NSEntityDescription.entity(forEntityName: K.CoreData.entityName, in: context)
-        let managedObject = NSManagedObject(entity: entity!, insertInto: context)
-        
-        managedObject.setValue(title, forKey: K.CoreData.forKeyTitle)
-        managedObject.setValue(detail, forKey: K.CoreData.forKeyDetail)
-        managedObject.setValue(completionTime, forKey: K.CoreData.forKeyCompletionTime)
-        managedObject.setValue(modifyTime, forKey: K.CoreData.forKeyModifyTime)
-        
+        let newTodo = Todo(context: context)
+
+        newTodo.id = UUID()
+        newTodo.title = title
+        newTodo.modifyTime = Date()
+
         do {
             try context.save()
         } catch {
             print(error.localizedDescription)
         }
-        
     }
-    
-    //fetch all the objects from Core Data
-    class func fetchObject(selectedScopeIndex: Int? = nil, targetText: String? = nil) -> [TodoItem] {
-        
-        var todoArray = [TodoItem]()
-        
+
+    func fetchTodoList() -> [Todo] {
+        let context = getContext()
+        var todoList = [Todo]()
         let fetchRequest: NSFetchRequest<Todo> = Todo.fetchRequest()
-        
-        if let index = selectedScopeIndex, let text = targetText {
-            var filterKeyword = ""
-            
-            switch index {
-            case 0:
-                filterKeyword = K.CoreData.SearchFilters.titleFilter
-            case 1:
-                filterKeyword = K.CoreData.SearchFilters.modifyTimeFilter
-            default:
-                print("Unknown selectedScopeIndex")
-            }
-            
-            
-            let predicate = NSPredicate(format: "\(filterKeyword) \(K.CoreData.SearchFilters.filterRule)", text)
-            fetchRequest.predicate = predicate
-        }
-        
+
         do {
-            let fetchResult = try getContext().fetch(fetchRequest)
-            
-            for item in fetchResult {
-                let todo = TodoItem(title: item.title, detail: item.detail, completionTime: item.completionTime, modifyTime: item.modifyTime)
-                todoArray.append(todo)
+            todoList = try context.fetch(fetchRequest)
+        } catch {
+            print(error.localizedDescription)
+        }
+
+        return todoList
+    }
+
+    func updateTodo(with todoId: UUID, title: String, description: String?, completionDate: Date?) {
+        let context = getContext()
+
+        let fetchRequest: NSFetchRequest<Todo> = Todo.fetchRequest()
+        let predicate = NSPredicate(format: "\(K.CoreData.forKeyId) == %@", todoId as CVarArg)
+        fetchRequest.predicate = predicate
+
+        do {
+            let object = try context.fetch(fetchRequest)
+            let objectUpdate = object.first
+
+            objectUpdate?.title = title
+            objectUpdate?.detail = description
+            objectUpdate?.completionTime = completionDate
+            objectUpdate?.modifyTime = Date()
+
+            do {
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
             }
         } catch {
             print(error.localizedDescription)
         }
-        
-        return todoArray
     }
-    
+
+    func deleteTodo(todo: Todo) {
+        let context = getContext()
+
+        do {
+            context.delete(todo)
+            try context.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 }
