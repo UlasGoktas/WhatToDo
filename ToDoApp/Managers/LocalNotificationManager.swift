@@ -35,10 +35,10 @@ class LocalNotificationManager: NSObject {
 
     // MARK: - Notification Trigger
 
-    func scheduledNotificationRequest(with deadline: Date, with todoName: String) {
+    func scheduledNotificationRequest(with deadline: Date, with todoTitle: String) {
         let content = UNMutableNotificationContent()
         content.title = "Your time is up!"
-        content.body = "Complete your \(todoName) task. Lazy!"
+        content.body = "Complete your \(todoTitle) task. Lazy!"
         content.sound = .default
         // Notification badge always show 1 notification on app icon
         content.badge = 1

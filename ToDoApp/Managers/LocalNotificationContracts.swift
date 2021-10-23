@@ -11,6 +11,6 @@ import UserNotifications
 protocol LocalNotificationManagerProtocol {
     func authorizeNotification()
     func configureNotification()
-    func scheduledNotificationRequest(with deadline: Date, with todoName: String)
+    func scheduledNotificationRequest(with deadline: Date, with todoTitle: String)
     func getNotificationAttachment() -> UNNotificationAttachment?
 }

@@ -10,16 +10,20 @@ import Foundation
 struct K {
 
     static let todoCellIdentifier = "TodoItemCell"
-    static let detailSegue = "goToDetails"
     static let storyboardName = "TodoList"
 
-    struct SearchBar {
+    struct NavigationBar {
 
-        static let scopeButtonTitle = "Title"
-        static let scopeButtonModifyTime = "Modify Time"
+        static let todoListTitle = "To-do List"
+        static let detailsTitle = "Details"
 
     }
 
+    struct SystemButtonName {
+
+        static let addButton = "plus"
+        static let orderByDateButton = "calendar.badge.clock"
+    }
     struct BrandColors {
 
         static let button = "ButtonColor"
@@ -45,14 +49,4 @@ struct K {
         static let forKeyId = "id"
 
     }
-
-    struct SearchFilters {
-        // [c] means case insensitive
-        static let filterRule = "contains[c] %@"
-        static let titleFilter = "title"
-        static let modifyTimeFilter = "modifyTime"
-        static let titleSearchIndex = 0
-        static let timeSearchIndex = 1
-    }
-
 }

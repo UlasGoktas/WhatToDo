@@ -17,10 +17,12 @@ class TodoDetailsViewController: UIViewController {
         self.setupHideKeyboardWhenTapOutside()
         configureDatePicker()
         configureNavigationBar()
+        // Observe to-do details change
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(todoDetailsChanged),
                                                name: Notification.Name.todoListNeedUpdate,
                                                object: nil)
+        // Don't update to-do if title is empty
         NotificationCenter.default.addObserver(
             forName: UITextField.textDidChangeNotification,
             object: titleTextField,
@@ -47,7 +49,7 @@ class TodoDetailsViewController: UIViewController {
     // MARK: - Configure Navigation Bar
 
     func configureNavigationBar() {
-        self.title = "Details"
+        self.title = K.NavigationBar.detailsTitle
         self.navigationController?.navigationBar.tintColor = UIColor(named: K.BrandColors.button)
         self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
@@ -90,6 +92,8 @@ class TodoDetailsViewController: UIViewController {
 //        print("Todo Details Changed")
     }
 
+    // MARK: - Date Picker Methods
+
     @objc func datePickerDoneButtonTapped() {
         isDatePicked = true
         completionDateTextField.text = datePicker.date.timeToString()
@@ -100,6 +104,8 @@ class TodoDetailsViewController: UIViewController {
         completionDateTextField.text = ""
         self.view.endEditing(true)
     }
+
+    // MARK: - Edit to-do details Method
 
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)

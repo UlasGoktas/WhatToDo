@@ -35,6 +35,7 @@ class TodoListViewController: UIViewController {
         viewModel.viewDidLoad()
     }
 
+    // TODO: After sorting the to-do list, it doesn't go to the details screen properly.
     @objc func orderByDateTapped() {
         viewModel.orderTodoListByDate(todoList: &filteredTodoList)
         self.tableView.reloadData()
@@ -44,26 +45,30 @@ class TodoListViewController: UIViewController {
         configureAddTodoButton()
     }
 
+    // MARK: - Configure Navigation Bar
+
     func configureNavigationBar() {
-        self.title = "Todo List"
+        self.title = K.NavigationBar.todoListTitle
         self.navigationController?.navigationBar.titleTextAttributes =
         [NSAttributedString.Key.font: UIFont(name: "Helvetica", size: 24)!]
 
         navigationController?.navigationBar.tintColor = UIColor(named: K.BrandColors.button)
         let addTodoBarButton = UIBarButtonItem(
-            image: UIImage(systemName: "plus"),
+            image: UIImage(systemName: K.SystemButtonName.addButton),
             style: .plain,
             target: self,
             action: #selector(addTodoButtonTapped))
         self.navigationItem.rightBarButtonItem = addTodoBarButton
 
         let orderBarButton = UIBarButtonItem(
-            image: UIImage(systemName: "calendar.badge.clock"),
+            image: UIImage(systemName: K.SystemButtonName.orderByDateButton),
             style: .plain,
             target: self,
             action: #selector(orderByDateTapped))
         self.navigationItem.leftBarButtonItem = orderBarButton
     }
+
+    // MARK: - Configure Add To-do Popup
 
     func configureAddTodoButton() {
         let alert = UIAlertController(title: "Add New Todo", message: nil, preferredStyle: .alert)
@@ -85,6 +90,7 @@ class TodoListViewController: UIViewController {
             textField.text = ""
             addAction.isEnabled = false
 
+            // Don't add to-do if title is empty
             NotificationCenter.default.addObserver(
                 forName: UITextField.textDidChangeNotification,
                 object: textField, queue: OperationQueue.main) { _ in
