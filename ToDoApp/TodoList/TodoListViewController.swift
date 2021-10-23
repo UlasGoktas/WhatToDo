@@ -36,7 +36,6 @@ class TodoListViewController: UIViewController {
     }
 
     @objc func orderByDateTapped() {
-        // TODO: gelen listenin goruntusu degisiyor fakat elemanlari hala eski sirada geliyor
         viewModel.orderTodoListByDate(todoList: &filteredTodoList)
         self.tableView.reloadData()
     }

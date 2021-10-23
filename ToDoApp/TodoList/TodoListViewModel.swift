@@ -30,7 +30,8 @@ class TodoListViewModel: TodoListViewModelProtocol {
     }
 
     func didSelectRow(at indexPath: IndexPath) {
-        let todo = todoList[indexPath.row]
+        let sortedList: [Todo] = todoList.sorted { $0.modifyTime! > $1.modifyTime! }
+        let todo = sortedList[indexPath.row]
         self.delegate?.navigateToRoute(to: .showTodoDetail(todo))
     }
 
