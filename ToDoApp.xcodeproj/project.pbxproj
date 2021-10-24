@@ -157,7 +157,6 @@
 				7C4E0E98270488E200BFB87A /* ToDoAppTests */,
 				7C4E0EA2270488E200BFB87A /* ToDoAppUITests */,
 				7C4E0E7D270488DF00BFB87A /* Products */,
-				8400B7EA9A876790EB36D674 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -262,13 +261,6 @@
 				7CF63D6A2719B5A600D4E04C /* NotificationImage.png */,
 			);
 			path = "Notification Asset";
-			sourceTree = "<group>";
-		};
-		8400B7EA9A876790EB36D674 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
