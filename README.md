@@ -92,7 +92,7 @@ What To Do is a simple To-do app written in Swift with Core Data.
 <img src="https://github.com/UlasGoktas/WhatToDo/blob/master/images/DarkMode.png" width="1000">
 
 ### Light Mode
-<img src="https://github.com/UlasGoktas/WhatToDo/blob/master/images/DarkMode.png" width="1000">
+<img src="https://github.com/UlasGoktas/WhatToDo/blob/master/images/LightMode.png" width="1000">
 
 <!-- LICENSE -->
 ## License
